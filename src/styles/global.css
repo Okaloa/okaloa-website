@@ -25,9 +25,11 @@
   --color-neutral-border: #e2e8f0;     /* Border color for cards */
   --color-neutral-border-dark: rgba(255, 255, 255, 0.08);
   
-  /* Fonts */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
-  --font-display: 'Source Serif 4', Georgia, serif;
+  /* Fonts (Adaptavis Desktop Fonts) */
+  --font-sans: Bahnschrift, "DIN Alternate", Arial, system-ui, sans-serif;
+  --font-quote: Baskerville, Georgia, "Times New Roman", serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   
   /* Spacing */
   --space-xxs: 0.25rem;  /* 4px */
@@ -365,10 +367,11 @@ a:hover {
 .text-right { text-align: right !important; }
 .text-justify { text-align: justify !important; }
 
-/* Font Family Classes */
+/* Font Family Classes (Adaptavis Desktop Fonts) */
 .font-family-sans { font-family: var(--font-sans) !important; }
-.font-family-serif { font-family: var(--font-display) !important; }
-.font-family-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important; }
+.font-family-baskerville { font-family: var(--font-quote) !important; }
+.font-family-serif { font-family: var(--font-serif) !important; }
+.font-family-mono { font-family: var(--font-mono) !important; }
 
 /* Font Size Classes (Including smaller XXS & XS sizes) */
 .text-size-xxs { font-size: 0.72rem !important; line-height: 1.4 !important; }

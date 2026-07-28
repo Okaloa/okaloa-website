@@ -75,8 +75,9 @@ const richTextBlock = [
               title: 'Font Family',
               options: {
                 list: [
-                  {title: 'Sans-Serif (Inter - Clean)', value: 'sans'},
-                  {title: 'Serif (Source Serif - Editorial)', value: 'serif'},
+                  {title: 'Bahnschrift / DIN Alternate (Sans-Serif)', value: 'sans'},
+                  {title: 'Baskerville (Quote Serif)', value: 'baskerville'},
+                  {title: 'Georgia / UI Serif (Serif)', value: 'serif'},
                   {title: 'Monospace (Code / Tech)', value: 'mono'},
                 ]
               }
