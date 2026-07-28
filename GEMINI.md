@@ -7,10 +7,16 @@ Current Phase: Phase 1: Discovery (Design Sign-off Pending)
 - Select CMS approach (Sanity.io headless CMS).
 - Initialize Astro project in the workspace.
 - Setup local Sanity Studio development folder (`/studio`).
-- Formulate [Architecture Plan](file:///Users/iniazsteyaert/.gemini/antigravity-cli/brain/cb473c0f-d788-4e80-a63a-58bc2d3018f0/architecture_plan.md) (Revised to Single-Page Scrollable site).
+- Formulate Architecture Plan (Single-Page Scrollable site).
 - Update Sanity Studio schema configurations inside `/studio/schemaTypes/` to enable editing of the homepage title/hero text, subsection texts, and adding events.
-- Link single-page sections dynamically to the new Sanity schemas in `index.astro`.
-- Verify static build success for both Astro and Sanity Studio.
+- Link single-page sections dynamically to Sanity schemas in `index.astro`.
+- Enable bullet points (`bullet`, `number` lists) and list item rendering with styled red markers.
+- Enable rich text links (`mailto:` and web URLs) with underline styling via Sanity link annotation.
+- Added Line Separator schema (`separator`) and Quote block schema (`quote`) in Sanity PortableText.
+- Made footer tagline text editable via Sanity CMS (`footerTagline`), setting initial default text to: `"It's not the strategy that's risky. It's what happens after."`
+- Added dynamic text alignment (center, left, right, justify), font sizes (sm, md, lg, xl), and text colors to PortableText block editor.
+- Added Extra Section (`extraSectionTitle` and `extraSection`) between "Is this for you?" and "About".
+- Verified static build success for both Astro (`npm run build`) and Sanity Studio (`npm --prefix studio run build`).
 
 ## 🏗 In Progress
 - Align styling to match CultureX aesthetics (dark theme, crisp serif/sans headings, sticky header).
@@ -18,4 +24,3 @@ Current Phase: Phase 1: Discovery (Design Sign-off Pending)
 ## 📋 Backlog
 - Set up local mock data for testing.
 - Deploy to Vercel.
-

@@ -8,7 +8,6 @@ export const sanityClient = createClient({
   apiVersion: '2024-01-01'
 })
 
-// Use factory directly to support最新 API without deprecation warning
 const builder = imageUrlBuilder(sanityClient)
 
 export function urlForImage(source: any): string | null {
@@ -24,22 +23,164 @@ export function urlForImage(source: any): string | null {
   return null;
 }
 
+function escapeHtml(str: string): string {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function renderChildren(block: any): string {
+  if (!block.children || !Array.isArray(block.children)) return '';
+  
+  const markDefsMap: Record<string, any> = {};
+  if (block.markDefs && Array.isArray(block.markDefs)) {
+    for (const def of block.markDefs) {
+      if (def && def._key) {
+        markDefsMap[def._key] = def;
+      }
+    }
+  }
+
+  return block.children.map((child: any) => {
+    if (!child) return '';
+    let text = escapeHtml(child.text || '');
+    if (!child.marks || !Array.isArray(child.marks) || child.marks.length === 0) {
+      return text;
+    }
+
+    for (const markKey of child.marks) {
+      if (markKey === 'strong') {
+        text = `<strong>${text}</strong>`;
+      } else if (markKey === 'em') {
+        text = `<em>${text}</em>`;
+      } else if (markKey === 'underline') {
+        text = `<u>${text}</u>`;
+      } else if (markKey === 'strike-through') {
+        text = `<s>${text}</s>`;
+      } else if (markKey === 'code') {
+        text = `<code>${text}</code>`;
+      } else if (markDefsMap[markKey]) {
+        const def = markDefsMap[markKey];
+        if (def._type === 'link') {
+          let href = def.href || '#';
+          if (href && !href.startsWith('http') && !href.startsWith('mailto:') && !href.startsWith('/') && !href.startsWith('#')) {
+            if (href.includes('@')) {
+              href = `mailto:${href}`;
+            }
+          }
+          const target = def.blank ? ' target="_blank" rel="noopener noreferrer"' : '';
+          text = `<a href="${escapeHtml(href)}"${target} class="content-link">${text}</a>`;
+        } else if (def._type === 'textColor') {
+          const colorClass = `text-color-${def.color || 'default'}`;
+          text = `<span class="${colorClass}">${text}</span>`;
+        } else if (def._type === 'fontSize') {
+          const sizeClass = `text-size-${def.size || 'md'}`;
+          text = `<span class="${sizeClass}">${text}</span>`;
+        } else if (def._type === 'textAlignment') {
+          const alignClass = `text-align-${def.alignment || 'left'}`;
+          text = `<span class="${alignClass}">${text}</span>`;
+        }
+      }
+    }
+    return text;
+  }).join('');
+}
+
 export function portableTextToHtml(blocks: any[]): string {
   if (!blocks || !Array.isArray(blocks)) return '';
-  return blocks.map(block => {
-    if (block._type === 'block') {
-      const text = block.children ? block.children.map((c: any) => {
-        let spanText = c.text || '';
-        if (c.marks && Array.isArray(c.marks)) {
-          if (c.marks.includes('strong')) spanText = `<strong>${spanText}</strong>`;
-          if (c.marks.includes('em')) spanText = `<em>${spanText}</em>`;
-        }
-        return spanText;
-      }).join('') : '';
-      
-      const tag = block.style === 'h3' ? 'h3' : block.style === 'h4' ? 'h4' : 'p';
-      return `<${tag}>${text}</${tag}>`;
+
+  let html = '';
+  let currentListType: string | null = null;
+
+  const closeList = () => {
+    if (currentListType === 'bullet') {
+      html += '</ul>';
+    } else if (currentListType === 'number') {
+      html += '</ol>';
     }
-    return '';
-  }).join('');
+    currentListType = null;
+  };
+
+  for (const block of blocks) {
+    if (!block) continue;
+
+    // 1. Line Separator element
+    if (block._type === 'separator' || block._type === 'hr' || block._type === 'lineBreak') {
+      closeList();
+      const style = block.style || 'thin';
+      html += `<hr class="content-separator separator-${style}" />`;
+      continue;
+    }
+
+    // 2. Quote Block element
+    if (block._type === 'quote') {
+      closeList();
+      const quoteText = block.text || '';
+      const author = block.author || '';
+      const role = block.role || '';
+      const borderStyle = block.borderStyle || 'accent-left';
+      html += `
+        <blockquote class="content-quote quote-${borderStyle}">
+          <p class="quote-text">"${escapeHtml(quoteText)}"</p>
+          ${(author || role) ? `<cite class="quote-author">— ${escapeHtml(author)}${role ? `, <span class="quote-role">${escapeHtml(role)}</span>` : ''}</cite>` : ''}
+        </blockquote>
+      `;
+      continue;
+    }
+
+    // 3. Embedded Image element
+    if (block._type === 'image') {
+      closeList();
+      const imgUrl = urlForImage(block);
+      if (imgUrl) {
+        html += `
+          <figure class="content-embedded-image">
+            <img src="${imgUrl}" alt="${escapeHtml(block.alt || '')}" loading="lazy" />
+            ${block.caption ? `<figcaption>${escapeHtml(block.caption)}</figcaption>` : ''}
+          </figure>
+        `;
+      }
+      continue;
+    }
+
+    // 4. Standard Block element (Paragraphs, Headings, Lists)
+    if (block._type === 'block') {
+      const isListItem = Boolean(block.listItem);
+      const listType = block.listItem; // 'bullet' or 'number'
+
+      if (isListItem) {
+        if (currentListType !== listType) {
+          closeList();
+          currentListType = listType;
+          html += listType === 'bullet' ? '<ul class="content-list bullet-list">' : '<ol class="content-list number-list">';
+        }
+        const innerText = renderChildren(block);
+        html += `<li>${innerText}</li>`;
+      } else {
+        closeList();
+        const innerText = renderChildren(block);
+        const style = block.style || 'normal';
+        let alignClass = '';
+        if (style === 'center') alignClass = ' text-center';
+
+        let tag = 'p';
+        if (style === 'h2') tag = 'h2';
+        else if (style === 'h3') tag = 'h3';
+        else if (style === 'h4') tag = 'h4';
+        else if (style === 'blockquote') tag = 'blockquote';
+
+        let extraClass = style === 'lead' ? ' lead-text' : '';
+        if (tag === 'blockquote') extraClass += ' content-quote quote-accent-left';
+
+        html += `<${tag} class="block-paragraph${alignClass}${extraClass}">${innerText}</${tag}>`;
+      }
+    }
+  }
+
+  closeList();
+  return html;
 }
