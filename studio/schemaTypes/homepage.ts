@@ -68,13 +68,6 @@ export default defineType({
 
     // Upcoming Events Section Settings
     defineField({
-      name: 'eventsSectionTitle',
-      title: 'Upcoming Events Section Title',
-      type: 'string',
-      description: 'Main title for the Upcoming Events section.',
-      initialValue: 'Upcoming Events'
-    }),
-    defineField({
       name: 'eventsSectionText',
       title: 'Upcoming Events Section Description / Subheader (Optional)',
       type: 'text',

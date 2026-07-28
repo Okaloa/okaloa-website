@@ -20,7 +20,6 @@ try {
     extraSectionTitle,
     extraSection,
     aboutSection,
-    eventsSectionTitle,
     eventsSectionText,
     eventsEmptyText,
     events,
@@ -50,7 +49,6 @@ const workingSecTitle = homepage.workingSectionTitle || homepage.extraSectionTit
 const workingSec = homepage.workingSection || homepage.extraSection;
 const aboutSec = homepage.aboutSection;
 
-const eventsSectionTitle = homepage.eventsSectionTitle || 'Upcoming Events';
 const eventsSectionText = homepage.eventsSectionText || '';
 const eventsEmptyText = homepage.eventsEmptyText || '';
 const homepageEvents = homepage.events || [];
@@ -166,10 +164,10 @@ const footerTagline = homepage.footerTagline || "It's not the strategy that's ri
   />
 
   <!-- Upcoming Events Section -->
-  <section class="section section-light" id="events">
-    <div class="container">
-      <div class="section-header text-center">
-        <h2>{eventsSectionTitle}</h2>
+  <section class="section section-soft" id="events">
+    <div class="container-narrow">
+      <div class="events-header">
+        <h2>Upcoming Events</h2>
         {eventsSectionText && <p class="section-subheader">{eventsSectionText}</p>}
       </div>
 
@@ -197,7 +195,7 @@ const footerTagline = homepage.footerTagline || "It's not the strategy that's ri
           ))}
         </div>
       ) : eventsEmptyText ? (
-        <div class="empty-events text-center">
+        <div class="empty-events">
           <p>{eventsEmptyText}</p>
         </div>
       ) : null}
@@ -310,14 +308,15 @@ const footerTagline = homepage.footerTagline || "It's not the strategy that's ri
   }
   
   /* Events Grid Styling */
-  .section-header {
-    max-width: 600px;
-    margin: 0 auto var(--space-xl);
+  .events-header {
+    margin-bottom: var(--space-lg);
   }
   
   .section-subheader {
     font-size: 1.1rem;
     color: var(--color-text-dark-muted);
+    margin-top: calc(-1 * var(--space-xs));
+    margin-bottom: 0;
   }
   
   .events-grid {

@@ -18,6 +18,8 @@ Current Phase: Phase 1: Discovery (Design Sign-off Pending)
 - Added "It's working" Section (`workingSectionTitle` and `workingSection`) between "Is this for you?" and "About".
 - Streamlined all section schemas in Sanity Studio to use a single, all-in-one content block editor.
 - Updated Sanity Studio font selection options and global CSS font-family stacks to match the desktop fonts from adaptavis.com (`Bahnschrift / DIN Alternate`, `Baskerville`, `Georgia / UI Serif`, and `Monospace`).
+- Removed editable title field for Upcoming Events in Sanity CMS (`homepage.ts`), keeping title fixed to "Upcoming Events" while preserving editable Attention Grabber title.
+- Updated Upcoming Events section layout and title alignment on the website (`index.astro`) to be left-aligned and container-matched with the rest of the page sections.
 - Verified static build success for Astro (`npm run build`).
 
 ## 🏗 In Progress
