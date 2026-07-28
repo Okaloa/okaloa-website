@@ -53,10 +53,31 @@ const richTextBlock = [
               title: 'Size',
               options: {
                 list: [
+                  {title: 'Tiny (XXS)', value: 'xxs'},
+                  {title: 'Extra Small (XS)', value: 'xs'},
                   {title: 'Small', value: 'sm'},
                   {title: 'Normal', value: 'md'},
                   {title: 'Large', value: 'lg'},
                   {title: 'Extra Large', value: 'xl'},
+                ]
+              }
+            }
+          ]
+        },
+        {
+          name: 'fontFamily',
+          type: 'object',
+          title: 'Font Type / Family',
+          fields: [
+            {
+              name: 'family',
+              type: 'string',
+              title: 'Font Family',
+              options: {
+                list: [
+                  {title: 'Sans-Serif (Inter - Clean)', value: 'sans'},
+                  {title: 'Serif (Source Serif - Editorial)', value: 'serif'},
+                  {title: 'Monospace (Code / Tech)', value: 'mono'},
                 ]
               }
             }

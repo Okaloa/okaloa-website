@@ -74,6 +74,9 @@ function renderChildren(block: any): string {
           }
           const target = def.blank ? ' target="_blank" rel="noopener noreferrer"' : '';
           text = `<a href="${escapeHtml(href)}"${target} class="content-link">${text}</a>`;
+        } else if (def._type === 'fontFamily') {
+          const fontClass = `font-family-${def.family || 'sans'}`;
+          text = `<span class="${fontClass}">${text}</span>`;
         } else if (def._type === 'textColor') {
           const colorClass = `text-color-${def.color || 'default'}`;
           text = `<span class="${colorClass}">${text}</span>`;

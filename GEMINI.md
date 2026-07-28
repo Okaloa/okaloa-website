@@ -17,7 +17,10 @@ Current Phase: Phase 1: Discovery (Design Sign-off Pending)
 - Added dynamic text alignment (center, left, right, justify), font sizes (sm, md, lg, xl), and text colors to PortableText block editor.
 - Added "It's working" Section (`workingSectionTitle` and `workingSection`) between "Is this for you?" and "About".
 - Streamlined all section schemas in Sanity Studio to use a single, all-in-one content block editor.
-- Verified static build success for both Astro (`npm run build`) and Sanity Studio (`npm --prefix studio run build`).
+- Added Font Family mark annotation (`fontFamily`: Sans-Serif, Serif, Monospace) to Sanity PortableText block editor.
+- Added smaller font sizes (`Tiny (XXS)`, `Extra Small (XS)`) to Sanity text input options.
+- Refined image captions to a sleek, modern, non-disruptive typography style (Source Serif font with subtle brand red accent dash, removing heavy old-school grey borders).
+- Verified static build success for Astro (`npm run build`).
 
 ## 🏗 In Progress
 - Align styling to match CultureX aesthetics (dark theme, crisp serif/sans headings, sticky header).

@@ -359,13 +359,21 @@ a:hover {
   color: var(--color-text-dark-muted);
 }
 
-/* Alignments, Font Sizes & Colors */
+/* Alignments, Font Families, Font Sizes & Colors */
 .text-center { text-align: center !important; }
 .text-left { text-align: left !important; }
 .text-right { text-align: right !important; }
 .text-justify { text-align: justify !important; }
 
-.text-size-sm { font-size: 0.92rem !important; }
+/* Font Family Classes */
+.font-family-sans { font-family: var(--font-sans) !important; }
+.font-family-serif { font-family: var(--font-display) !important; }
+.font-family-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important; }
+
+/* Font Size Classes (Including smaller XXS & XS sizes) */
+.text-size-xxs { font-size: 0.72rem !important; line-height: 1.4 !important; }
+.text-size-xs { font-size: 0.84rem !important; line-height: 1.5 !important; }
+.text-size-sm { font-size: 0.95rem !important; }
 .text-size-md { font-size: 1.15rem !important; }
 .text-size-lg { font-size: 1.35rem !important; }
 .text-size-xl { font-size: 1.6rem !important; }
@@ -394,3 +402,26 @@ a:hover {
   box-shadow: var(--shadow-sm);
   display: block;
 }
+
+/* Sleek, Modern & Non-Disruptive Image Caption Styling */
+figcaption {
+  margin-top: 0.65rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--color-text-dark-muted);
+  text-align: center;
+  background: transparent;
+  border: none;
+  padding: 0 0.5rem;
+  letter-spacing: 0.01em;
+}
+
+figcaption::before {
+  content: '— ';
+  color: var(--color-brand-red);
+  font-weight: 600;
+  font-style: normal;
+}
+
