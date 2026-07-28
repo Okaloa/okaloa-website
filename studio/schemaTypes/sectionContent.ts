@@ -131,63 +131,11 @@ export default defineType({
   type: 'object',
   fields: [
     defineField({
-      name: 'text1',
-      title: 'Text Block 1',
+      name: 'content',
+      title: 'Main Section Content',
       type: 'array',
       of: richTextBlock,
-      description: 'First content block in this section.'
-    }),
-    defineField({
-      name: 'image1',
-      title: 'Image 1',
-      type: 'image',
-      options: {hotspot: true},
-      fields: [
-        defineField({
-          name: 'alt',
-          title: 'Alternative Text',
-          type: 'string'
-        }),
-        defineField({
-          name: 'caption',
-          title: 'Caption',
-          type: 'string'
-        })
-      ],
-      description: 'First image in this section.'
-    }),
-    defineField({
-      name: 'text2',
-      title: 'Text Block 2',
-      type: 'array',
-      of: richTextBlock,
-      description: 'Second content block in this section.'
-    }),
-    defineField({
-      name: 'image2',
-      title: 'Image 2',
-      type: 'image',
-      options: {hotspot: true},
-      fields: [
-        defineField({
-          name: 'alt',
-          title: 'Alternative Text',
-          type: 'string'
-        }),
-        defineField({
-          name: 'caption',
-          title: 'Caption',
-          type: 'string'
-        })
-      ],
-      description: 'Second image in this section.'
-    }),
-    defineField({
-      name: 'text3',
-      title: 'Text Block 3',
-      type: 'array',
-      of: richTextBlock,
-      description: 'Third content block in this section.'
+      description: 'Single all-in-one block editor. Add text paragraphs, bullet lists, images, quotes, and line separators in any order.'
     })
   ]
 })

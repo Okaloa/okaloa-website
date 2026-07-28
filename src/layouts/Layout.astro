@@ -5,14 +5,14 @@ interface Props {
   title: string;
   description?: string;
   footerTagline?: string;
-  extraSectionTitle?: string;
+  workingSectionTitle?: string;
 }
 
 const { 
   title, 
   description = "Measure and scale agile through experiential simulation dojos. Okaloa helps leading teams improve strategic agility.",
   footerTagline = "It's not the strategy that's risky. It's what happens after.",
-  extraSectionTitle
+  workingSectionTitle
 } = Astro.props;
 ---
 
@@ -50,8 +50,8 @@ const {
           <li><a href="#de-risking" class="nav-item">De-risking</a></li>
           <li><a href="#how-we-engage" class="nav-item">How we engage</a></li>
           <li><a href="#is-this-for-you" class="nav-item">Is this for you</a></li>
-          {extraSectionTitle && (
-            <li><a href="#extra-section" class="nav-item">{extraSectionTitle}</a></li>
+          {workingSectionTitle && (
+            <li><a href="#its-working" class="nav-item">{workingSectionTitle}</a></li>
           )}
           <li><a href="#about" class="nav-item">About</a></li>
           <li><a href="#events" class="nav-item">Upcoming Events</a></li>
@@ -101,8 +101,8 @@ const {
             <li><a href="#de-risking">De-risking</a></li>
             <li><a href="#how-we-engage">How we engage</a></li>
             <li><a href="#is-this-for-you">Is this for you</a></li>
-            {extraSectionTitle && (
-              <li><a href="#extra-section">{extraSectionTitle}</a></li>
+            {workingSectionTitle && (
+              <li><a href="#its-working">{workingSectionTitle}</a></li>
             )}
             <li><a href="#about">About Us</a></li>
           </ul>

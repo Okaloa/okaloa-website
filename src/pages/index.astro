@@ -15,9 +15,15 @@ try {
     deriskingSection,
     engageSection,
     whenSection,
+    workingSectionTitle,
+    workingSection,
     extraSectionTitle,
     extraSection,
     aboutSection,
+    eventsSectionTitle,
+    eventsSectionText,
+    eventsEmptyText,
+    events,
     footerTagline
   }`);
   
@@ -33,16 +39,23 @@ try {
 }
 
 const homepage = content || {};
-const finalEvents = events || [];
+const standaloneEvents = events || [];
 
 const heroHeadline = homepage.heroHeadline;
 const heroSec = homepage.heroSection;
 const deriskingSec = homepage.deriskingSection;
 const engageSec = homepage.engageSection;
 const whenSec = homepage.whenSection;
-const extraSecTitle = homepage.extraSectionTitle || "It's working";
-const extraSec = homepage.extraSection;
+const workingSecTitle = homepage.workingSectionTitle || homepage.extraSectionTitle || "It's working";
+const workingSec = homepage.workingSection || homepage.extraSection;
 const aboutSec = homepage.aboutSection;
+
+const eventsSectionTitle = homepage.eventsSectionTitle || 'Upcoming Events';
+const eventsSectionText = homepage.eventsSectionText || '';
+const eventsEmptyText = homepage.eventsEmptyText || '';
+const homepageEvents = homepage.events || [];
+const finalEvents = homepageEvents.length > 0 ? homepageEvents : standaloneEvents;
+
 const footerTagline = homepage.footerTagline || "It's not the strategy that's risky. It's what happens after.";
 ---
 
@@ -50,7 +63,7 @@ const footerTagline = homepage.footerTagline || "It's not the strategy that's ri
   title="Strategic Agility & Flow Simulations" 
   description="Measure and improve strategic agility and collaboration through experiential simulation dojos."
   footerTagline={footerTagline}
-  extraSectionTitle={extraSecTitle}
+  workingSectionTitle={workingSecTitle}
 >
   
   <!-- Hero / Attention Grabber Section -->
@@ -63,33 +76,41 @@ const footerTagline = homepage.footerTagline || "It's not the strategy that's ri
         </h1>
       )}
       
-      {/* Hero Section Content Layout: text1, image1, text2, image2, text3 */}
+      {/* Hero Section Content Layout: main content stream or legacy text1/image1/text2/image2/text3 */}
       {heroSec && (
         <div class="hero-content-flow">
-          {heroSec.text1 && heroSec.text1.length > 0 && (
+          {heroSec.content && heroSec.content.length > 0 ? (
             <div class="hero-text">
-              <Fragment set:html={portableTextToHtml(heroSec.text1)} />
+              <Fragment set:html={portableTextToHtml(heroSec.content)} />
             </div>
-          )}
-          {heroSec.image1 && (
-            <div class="hero-image">
-              <img src={urlForImage(heroSec.image1)} alt={heroSec.image1?.alt || 'Hero Image'} />
-            </div>
-          )}
-          {heroSec.text2 && heroSec.text2.length > 0 && (
-            <div class="hero-text">
-              <Fragment set:html={portableTextToHtml(heroSec.text2)} />
-            </div>
-          )}
-          {heroSec.image2 && (
-            <div class="hero-image">
-              <img src={urlForImage(heroSec.image2)} alt={heroSec.image2?.alt || 'Hero Image'} />
-            </div>
-          )}
-          {heroSec.text3 && heroSec.text3.length > 0 && (
-            <div class="hero-text">
-              <Fragment set:html={portableTextToHtml(heroSec.text3)} />
-            </div>
+          ) : (
+            <>
+              {heroSec.text1 && heroSec.text1.length > 0 && (
+                <div class="hero-text">
+                  <Fragment set:html={portableTextToHtml(heroSec.text1)} />
+                </div>
+              )}
+              {heroSec.image1 && (
+                <div class="hero-image">
+                  <img src={urlForImage(heroSec.image1)} alt={heroSec.image1?.alt || 'Hero Image'} />
+                </div>
+              )}
+              {heroSec.text2 && heroSec.text2.length > 0 && (
+                <div class="hero-text">
+                  <Fragment set:html={portableTextToHtml(heroSec.text2)} />
+                </div>
+              )}
+              {heroSec.image2 && (
+                <div class="hero-image">
+                  <img src={urlForImage(heroSec.image2)} alt={heroSec.image2?.alt || 'Hero Image'} />
+                </div>
+              )}
+              {heroSec.text3 && heroSec.text3.length > 0 && (
+                <div class="hero-text">
+                  <Fragment set:html={portableTextToHtml(heroSec.text3)} />
+                </div>
+              )}
+            </>
           )}
         </div>
       )}
@@ -128,11 +149,11 @@ const footerTagline = homepage.footerTagline || "It's not the strategy that's ri
     bgClass="section-light"
   />
 
-  <!-- Extra Section (between Is This For You and About) -->
+  <!-- It's Working Section -->
   <SectionBlock
-    id="extra-section"
-    title={extraSecTitle}
-    section={extraSec}
+    id="its-working"
+    title={workingSecTitle}
+    section={workingSec}
     bgClass="section-soft"
   />
 
@@ -148,8 +169,8 @@ const footerTagline = homepage.footerTagline || "It's not the strategy that's ri
   <section class="section section-light" id="events">
     <div class="container">
       <div class="section-header text-center">
-        <h2>Upcoming Events</h2>
-        <p class="section-subheader">Join our live simulation workshops and dojo training sessions.</p>
+        <h2>{eventsSectionTitle}</h2>
+        {eventsSectionText && <p class="section-subheader">{eventsSectionText}</p>}
       </div>
 
       {finalEvents.length > 0 ? (
@@ -175,11 +196,11 @@ const footerTagline = homepage.footerTagline || "It's not the strategy that's ri
             </div>
           ))}
         </div>
-      ) : (
+      ) : eventsEmptyText ? (
         <div class="empty-events text-center">
-          <p>No upcoming events currently scheduled. Check back soon!</p>
+          <p>{eventsEmptyText}</p>
         </div>
-      )}
+      ) : null}
     </div>
   </section>
 </Layout>

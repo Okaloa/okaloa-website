@@ -15,7 +15,7 @@ export default defineConfig({
         S.list()
           .title('Content')
           .items([
-            // Singleton for Homepage Content
+            // Single document for Homepage Sections
             S.listItem()
               .title('Homepage Sections')
               .id('homepage')
@@ -24,10 +24,7 @@ export default defineConfig({
                   .schemaType('homepage')
                   .documentId('homepage')
                   .title('Homepage Sections')
-              ),
-            S.divider(),
-            // Regular list for Events
-            S.documentTypeListItem('event').title('Upcoming Events'),
+              )
           ]),
     }),
   ],

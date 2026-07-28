@@ -5,6 +5,7 @@ interface Props {
   id: string;
   title: string;
   section?: {
+    content?: any[];
     text1?: any[];
     image1?: any;
     text2?: any[];
@@ -15,6 +16,8 @@ interface Props {
 }
 
 const { id, title, section, bgClass = 'section-light' } = Astro.props;
+
+const content = section?.content;
 
 const text1 = section?.text1;
 const image1Url = section?.image1 ? urlForImage(section.image1) : null;
@@ -33,41 +36,44 @@ const text3 = section?.text3;
   <div class="container-narrow">
     <h2>{title}</h2>
     <div class="section-content section-grid-layout">
-      {/* Text 1 */}
-      {text1 && text1.length > 0 && (
-        <div class="block-text text-1">
-          <Fragment set:html={portableTextToHtml(text1)} />
+      {content && content.length > 0 ? (
+        <div class="block-text single-content-flow">
+          <Fragment set:html={portableTextToHtml(content)} />
         </div>
-      )}
+      ) : (
+        <>
+          {text1 && text1.length > 0 && (
+            <div class="block-text text-1">
+              <Fragment set:html={portableTextToHtml(text1)} />
+            </div>
+          )}
 
-      {/* Image 1 */}
-      {image1Url && (
-        <figure class="block-image image-1">
-          <img src={image1Url} alt={image1Alt} loading="lazy" />
-          {image1Caption && <figcaption>{image1Caption}</figcaption>}
-        </figure>
-      )}
+          {image1Url && (
+            <figure class="block-image image-1">
+              <img src={image1Url} alt={image1Alt} loading="lazy" />
+              {image1Caption && <figcaption>{image1Caption}</figcaption>}
+            </figure>
+          )}
 
-      {/* Text 2 */}
-      {text2 && text2.length > 0 && (
-        <div class="block-text text-2">
-          <Fragment set:html={portableTextToHtml(text2)} />
-        </div>
-      )}
+          {text2 && text2.length > 0 && (
+            <div class="block-text text-2">
+              <Fragment set:html={portableTextToHtml(text2)} />
+            </div>
+          )}
 
-      {/* Image 2 */}
-      {image2Url && (
-        <figure class="block-image image-2">
-          <img src={image2Url} alt={image2Alt} loading="lazy" />
-          {image2Caption && <figcaption>{image2Caption}</figcaption>}
-        </figure>
-      )}
+          {image2Url && (
+            <figure class="block-image image-2">
+              <img src={image2Url} alt={image2Alt} loading="lazy" />
+              {image2Caption && <figcaption>{image2Caption}</figcaption>}
+            </figure>
+          )}
 
-      {/* Text 3 */}
-      {text3 && text3.length > 0 && (
-        <div class="block-text text-3">
-          <Fragment set:html={portableTextToHtml(text3)} />
-        </div>
+          {text3 && text3.length > 0 && (
+            <div class="block-text text-3">
+              <Fragment set:html={portableTextToHtml(text3)} />
+            </div>
+          )}
+        </>
       )}
     </div>
   </div>
