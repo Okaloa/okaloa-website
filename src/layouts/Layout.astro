@@ -1,16 +1,17 @@
 ---
 import '../styles/global.css';
+import { portableTextToHtml } from '../utils/sanity';
 
 interface Props {
   title: string;
   description?: string;
-  footerTagline?: string;
+  footerTagline?: any;
 }
 
 const { 
   title, 
   description = "Helping leaders de-risk strategic initiatives",
-  footerTagline = "It's not the strategy that's risky. It's what happens after."
+  footerTagline = "Helping leaders de-risk strategic initiatives\n\nA good strategy doesn't reliably turn into value. The gap exists because of unaddressed risk. De-risking closes that gap."
 } = Astro.props;
 ---
 
@@ -88,7 +89,9 @@ const {
       <div class="container footer-grid">
         <div class="footer-brand">
           <img src="/images/okaloa-logo-reverse.png" alt="Okaloa Logo" height="32" class="footer-logo-img" />
-          <p class="footer-tagline">{footerTagline}</p>
+          <div class="footer-tagline">
+            <Fragment set:html={portableTextToHtml(footerTagline)} />
+          </div>
         </div>
         
         <div class="footer-nav">
@@ -470,9 +473,22 @@ const {
     margin-bottom: var(--space-sm);
   }
   
-  .footer-tagline {
+  .footer-tagline p,
+  .footer-tagline :global(p) {
     font-size: 0.95rem;
     color: #a0aec0;
+    line-height: 1.6;
+    margin-bottom: var(--space-xs);
+  }
+  
+  .footer-tagline p:last-child,
+  .footer-tagline :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  
+  .footer-tagline :global(a) {
+    color: var(--color-brand-red);
+    text-decoration: underline;
   }
   
   .footer-nav h4, .footer-contact h4 {

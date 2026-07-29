@@ -135,9 +135,9 @@ export default defineType({
     defineField({
       name: 'footerTagline',
       title: 'Footer Tagline / Text Under Logo',
-      type: 'string',
-      description: 'Text displayed directly underneath the Okaloa logo in the website footer.',
-      initialValue: "It's not the strategy that's risky. It's what happens after."
+      type: 'array',
+      of: richTextBlock,
+      description: 'Text block displayed underneath the Okaloa logo in the website footer. Supports multiple paragraphs, newlines, formatting, and links.'
     }),
   ]
 })
