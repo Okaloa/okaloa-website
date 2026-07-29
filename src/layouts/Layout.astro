@@ -5,14 +5,12 @@ interface Props {
   title: string;
   description?: string;
   footerTagline?: string;
-  workingSectionTitle?: string;
 }
 
 const { 
   title, 
-  description = "Measure and scale agile through experiential simulation dojos. Okaloa helps leading teams improve strategic agility.",
-  footerTagline = "It's not the strategy that's risky. It's what happens after.",
-  workingSectionTitle
+  description = "Helping leaders de-risk strategic initiatives",
+  footerTagline = "It's not the strategy that's risky. It's what happens after."
 } = Astro.props;
 ---
 
@@ -50,13 +48,11 @@ const {
           <li><a href="#de-risking" class="nav-item">De-risking</a></li>
           <li><a href="#how-we-engage" class="nav-item">How we engage</a></li>
           <li><a href="#is-this-for-you" class="nav-item">Is this for you</a></li>
-          {workingSectionTitle && (
-            <li><a href="#its-working" class="nav-item">{workingSectionTitle}</a></li>
-          )}
+          <li><a href="#its-working" class="nav-item">It's working</a></li>
           <li><a href="#about" class="nav-item">About</a></li>
           <li><a href="#events" class="nav-item">Upcoming Events</a></li>
           <li class="nav-contact-wrapper">
-            <a href="mailto:info@okaloa.com?subject=Contact" class="contact-btn" id="nav-contact-btn">Contact</a>
+            <a href="mailto:info@okaloa.com" class="contact-btn" id="nav-contact-btn">Contact</a>
             <div id="contact-popover" class="contact-popover" aria-hidden="true">
               <div class="popover-content">
                 <span class="popover-email" id="email-address">info@okaloa.com</span>
@@ -64,7 +60,7 @@ const {
                   <button class="popover-btn popover-copy-btn" id="copy-email-btn" aria-label="Copy email address">
                     <span class="copy-btn-text">Copy</span>
                   </button>
-                  <a href="mailto:info@okaloa.com?subject=Contact" class="popover-btn popover-mail-btn" aria-label="Open in email application">
+                  <a href="mailto:info@okaloa.com" class="popover-btn popover-mail-btn" aria-label="Open in email application">
                     Email Us
                   </a>
                 </div>
@@ -101,9 +97,7 @@ const {
             <li><a href="#de-risking">De-risking</a></li>
             <li><a href="#how-we-engage">How we engage</a></li>
             <li><a href="#is-this-for-you">Is this for you</a></li>
-            {workingSectionTitle && (
-              <li><a href="#its-working">{workingSectionTitle}</a></li>
-            )}
+            <li><a href="#its-working">It's working</a></li>
             <li><a href="#about">About Us</a></li>
           </ul>
         </div>
@@ -114,7 +108,7 @@ const {
           <p>VAT: BE0478.205.050</p>
           <div class="contact-methods">
             <a href="tel:+32473565098" id="footer-phone" class="contact-link">Phone: +32 473 56 50 98</a>
-            <a href="mailto:info@okaloa.com?subject=Inquiry" id="footer-email" class="contact-link">Email: info@okaloa.com</a>
+            <a href="mailto:info@okaloa.com" id="footer-email" class="contact-link">Email: info@okaloa.com</a>
           </div>
         </div>
       </div>

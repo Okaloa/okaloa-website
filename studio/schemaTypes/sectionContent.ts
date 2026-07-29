@@ -1,6 +1,6 @@
 import {defineType, defineField} from 'sanity'
 
-const richTextBlock = [
+export const richTextBlock = [
   {
     type: 'block',
     styles: [
@@ -8,7 +8,10 @@ const richTextBlock = [
       {title: 'Heading 2', value: 'h2'},
       {title: 'Heading 3', value: 'h3'},
       {title: 'Heading 4', value: 'h4'},
-      {title: 'Centered Text', value: 'center'},
+      {title: 'Align Center', value: 'center'},
+      {title: 'Align Right', value: 'right'},
+      {title: 'Align Left', value: 'left'},
+      {title: 'Align Justify', value: 'justify'},
       {title: 'Lead Text (Larger)', value: 'lead'},
       {title: 'Quote', value: 'blockquote'},
     ],
@@ -51,6 +54,7 @@ const richTextBlock = [
               name: 'size',
               type: 'string',
               title: 'Size',
+              initialValue: 'md',
               options: {
                 list: [
                   {title: 'Tiny (XXS)', value: 'xxs'},
@@ -73,6 +77,7 @@ const richTextBlock = [
               name: 'family',
               type: 'string',
               title: 'Font Family',
+              initialValue: 'sans',
               options: {
                 list: [
                   {title: 'Museo Sans (Standard)', value: 'sans'},
@@ -92,6 +97,7 @@ const richTextBlock = [
               name: 'color',
               type: 'string',
               title: 'Color',
+              initialValue: 'default',
               options: {
                 list: [
                   {title: 'Default Color', value: 'default'},
@@ -112,6 +118,7 @@ const richTextBlock = [
               name: 'alignment',
               type: 'string',
               title: 'Alignment',
+              initialValue: 'center',
               options: {
                 list: [
                   {title: 'Left', value: 'left'},

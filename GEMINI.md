@@ -21,6 +21,12 @@ Current Phase: Phase 1: Discovery (Design Sign-off Pending)
 - Removed editable title field for Upcoming Events in Sanity CMS (`homepage.ts`), keeping title fixed to "Upcoming Events" while preserving editable Attention Grabber title.
 - Updated Upcoming Events section layout and title alignment on the website (`index.astro`) to be left-aligned and container-matched with the rest of the page sections.
 - Verified static build success for Astro (`npm run build`).
+- Fixed PortableText newline and empty line rendering (`\n` to `<br />` and empty paragraph height preservation).
+- Fixed text alignment styles in global CSS (`.text-align-center`, `.text-align-left`, `.text-align-right`, `.text-align-justify` with `display: block`).
+- Converted Upcoming Events text fields (`eventsSectionText`, `eventsEmptyText`, `description`) to rich PortableText block editors so editing menus (links, formatting) are available.
+- Streamlined "It's working" section title to be fixed to "It's working" (removed `workingSectionTitle` schema field from Sanity Studio).
+- Cleaned up email contact links in footer and navigation header to use consistent `mailto:info@okaloa.com` without pre-filled subjects.
+- Updated site meta description and `og:description` to `"Helping leaders de-risk strategic initiatives"`.
 
 ## 🏗 In Progress
 - Align styling to match CultureX aesthetics (dark theme, crisp serif/sans headings, sticky header).

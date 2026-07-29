@@ -48,6 +48,9 @@ function renderChildren(block: any): string {
   return block.children.map((child: any) => {
     if (!child) return '';
     let text = escapeHtml(child.text || '');
+    if (text) {
+      text = text.replace(/\n/g, '<br />');
+    }
     if (!child.marks || !Array.isArray(child.marks) || child.marks.length === 0) {
       return text;
     }
@@ -93,8 +96,12 @@ function renderChildren(block: any): string {
   }).join('');
 }
 
-export function portableTextToHtml(blocks: any[]): string {
-  if (!blocks || !Array.isArray(blocks)) return '';
+export function portableTextToHtml(blocks: any): string {
+  if (!blocks) return '';
+  if (typeof blocks === 'string') {
+    return `<p class="block-paragraph">${escapeHtml(blocks).replace(/\n/g, '<br />')}</p>`;
+  }
+  if (!Array.isArray(blocks)) return '';
 
   let html = '';
   let currentListType: string | null = null;
@@ -161,14 +168,23 @@ export function portableTextToHtml(blocks: any[]): string {
           currentListType = listType;
           html += listType === 'bullet' ? '<ul class="content-list bullet-list">' : '<ol class="content-list number-list">';
         }
-        const innerText = renderChildren(block);
+        let innerText = renderChildren(block);
+        if (!innerText || !innerText.trim()) {
+          innerText = '<br />';
+        }
         html += `<li>${innerText}</li>`;
       } else {
         closeList();
-        const innerText = renderChildren(block);
+        let innerText = renderChildren(block);
+        if (!innerText || !innerText.trim()) {
+          innerText = '<br />';
+        }
         const style = block.style || 'normal';
         let alignClass = '';
         if (style === 'center') alignClass = ' text-center';
+        else if (style === 'right') alignClass = ' text-right';
+        else if (style === 'left') alignClass = ' text-left';
+        else if (style === 'justify') alignClass = ' text-justify';
 
         let tag = 'p';
         if (style === 'h2') tag = 'h2';

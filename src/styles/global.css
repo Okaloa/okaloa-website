@@ -363,10 +363,10 @@ a:hover {
 }
 
 /* Alignments, Font Families, Font Sizes & Colors */
-.text-center { text-align: center !important; }
-.text-left { text-align: left !important; }
-.text-right { text-align: right !important; }
-.text-justify { text-align: justify !important; }
+.text-center, .text-align-center { text-align: center !important; display: block; width: 100%; }
+.text-left, .text-align-left { text-align: left !important; display: block; width: 100%; }
+.text-right, .text-align-right { text-align: right !important; display: block; width: 100%; }
+.text-justify, .text-align-justify { text-align: justify !important; display: block; width: 100%; }
 
 /* Font Family Classes */
 .font-family-sans { font-family: var(--font-sans) !important; }

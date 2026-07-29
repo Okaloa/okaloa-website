@@ -15,9 +15,7 @@ try {
     deriskingSection,
     engageSection,
     whenSection,
-    workingSectionTitle,
     workingSection,
-    extraSectionTitle,
     extraSection,
     aboutSection,
     eventsSectionText,
@@ -45,7 +43,6 @@ const heroSec = homepage.heroSection;
 const deriskingSec = homepage.deriskingSection;
 const engageSec = homepage.engageSection;
 const whenSec = homepage.whenSection;
-const workingSecTitle = homepage.workingSectionTitle || homepage.extraSectionTitle || "It's working";
 const workingSec = homepage.workingSection || homepage.extraSection;
 const aboutSec = homepage.aboutSection;
 
@@ -59,9 +56,8 @@ const footerTagline = homepage.footerTagline || "It's not the strategy that's ri
 
 <Layout 
   title="Strategic Agility & Flow Simulations" 
-  description="Measure and improve strategic agility and collaboration through experiential simulation dojos."
+  description="Helping leaders de-risk strategic initiatives"
   footerTagline={footerTagline}
-  workingSectionTitle={workingSecTitle}
 >
   
   <!-- Hero / Attention Grabber Section -->
@@ -150,7 +146,7 @@ const footerTagline = homepage.footerTagline || "It's not the strategy that's ri
   <!-- It's Working Section -->
   <SectionBlock
     id="its-working"
-    title={workingSecTitle}
+    title="It's working"
     section={workingSec}
     bgClass="section-soft"
   />
@@ -168,7 +164,11 @@ const footerTagline = homepage.footerTagline || "It's not the strategy that's ri
     <div class="container-narrow">
       <div class="events-header">
         <h2>Upcoming Events</h2>
-        {eventsSectionText && <p class="section-subheader">{eventsSectionText}</p>}
+        {eventsSectionText && (
+          <div class="section-subheader">
+            <Fragment set:html={portableTextToHtml(eventsSectionText)} />
+          </div>
+        )}
       </div>
 
       {finalEvents.length > 0 ? (
@@ -185,7 +185,11 @@ const footerTagline = homepage.footerTagline || "It's not the strategy that's ri
                 </span>
               </div>
               <h3>{event.title}</h3>
-              {event.description && <p class="event-desc">{event.description}</p>}
+              {event.description && (
+                <div class="event-desc">
+                  <Fragment set:html={portableTextToHtml(event.description)} />
+                </div>
+              )}
               {event.link && (
                 <a href={event.link} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm event-link" id={`btn-event-${event.id || event._id}`}>
                   Register Now &rarr;
@@ -196,7 +200,7 @@ const footerTagline = homepage.footerTagline || "It's not the strategy that's ri
         </div>
       ) : eventsEmptyText ? (
         <div class="empty-events">
-          <p>{eventsEmptyText}</p>
+          <Fragment set:html={portableTextToHtml(eventsEmptyText)} />
         </div>
       ) : null}
     </div>

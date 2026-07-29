@@ -1,4 +1,5 @@
 import {defineType, defineField} from 'sanity'
+import {richTextBlock} from './sectionContent'
 
 export default defineType({
   name: 'homepage',
@@ -45,13 +46,6 @@ export default defineType({
 
     // It's Working Section (Between Is This For You and About)
     defineField({
-      name: 'workingSectionTitle',
-      title: 'It\'s Working Section Title',
-      type: 'string',
-      description: 'Title for the section between "Is this for you?" and "About".',
-      initialValue: "It's working"
-    }),
-    defineField({
       name: 'workingSection',
       title: 'It\'s Working Section Content',
       type: 'sectionContent',
@@ -70,15 +64,15 @@ export default defineType({
     defineField({
       name: 'eventsSectionText',
       title: 'Upcoming Events Section Description / Subheader (Optional)',
-      type: 'text',
-      rows: 2,
-      description: 'Optional text block underneath the Upcoming Events title.'
+      type: 'array',
+      of: richTextBlock,
+      description: 'Optional rich text block underneath the Upcoming Events title.'
     }),
     defineField({
       name: 'eventsEmptyText',
       title: 'No Upcoming Events Message (Optional)',
-      type: 'text',
-      rows: 2,
+      type: 'array',
+      of: richTextBlock,
       description: 'Message displayed when there are no upcoming events. Leave blank if you do not want to show any message.'
     }),
     defineField({
@@ -110,8 +104,9 @@ export default defineType({
             defineField({
               name: 'description',
               title: 'Event Description',
-              type: 'text',
-              rows: 3
+              type: 'array',
+              of: richTextBlock,
+              description: 'Rich text description with links, bold, lists, and formatting options.'
             }),
             defineField({
               name: 'link',
