@@ -1,9 +1,21 @@
+import React from 'react'
 import {defineType, defineField} from 'sanity'
+
+const FontFamilyRender = (props: any) => {
+  return React.createElement(
+    'span',
+    { style: { fontStyle: 'inherit' } },
+    props.renderDefault(props)
+  )
+}
 
 export default defineType({
   name: 'fontFamily',
   title: 'Font Type / Family',
   type: 'object',
+  components: {
+    annotation: FontFamilyRender
+  },
   fields: [
     defineField({
       name: 'family',
