@@ -382,9 +382,13 @@ a:hover {
 .text-size-lg { font-size: 1.35rem !important; }
 .text-size-xl { font-size: 1.6rem !important; }
 
-.text-color-brand-red { color: var(--color-brand-red) !important; }
-.text-color-muted { color: var(--color-text-dark-muted) !important; }
-.text-color-white { color: var(--color-neutral-white) !important; }
+.text-color-brand-red, p .text-color-brand-red, div .text-color-brand-red { color: var(--color-brand-red) !important; }
+.text-color-muted, p .text-color-muted, div .text-color-muted { color: var(--color-text-dark-muted) !important; }
+.text-color-dark, p .text-color-dark, div .text-color-dark { color: var(--color-text-dark) !important; }
+.text-color-white, p .text-color-white, div .text-color-white { color: var(--color-neutral-white) !important; }
+.text-color-navy, p .text-color-navy, div .text-color-navy { color: #2b6cb0 !important; }
+.text-color-green, p .text-color-green, div .text-color-green { color: #2f855a !important; }
+.text-color-amber, p .text-color-amber, div .text-color-amber { color: #d97706 !important; }
 
 .lead-text {
   font-size: 1.3rem !important;
@@ -393,7 +397,7 @@ a:hover {
   color: var(--color-text-dark);
 }
 
-/* Embedded Image inside PortableText */
+/* Embedded Image inside PortableText - Render clean as-is without borders/shadows */
 .content-embedded-image {
   margin: var(--space-md) 0;
   width: 100%;
@@ -402,8 +406,10 @@ a:hover {
 .content-embedded-image img {
   width: 100%;
   height: auto;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
   display: block;
 }
 

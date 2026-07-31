@@ -27,6 +27,10 @@ Current Phase: Phase 1: Discovery (Design Sign-off Pending)
 - Streamlined "It's working" section title to be fixed to "It's working" (removed `workingSectionTitle` schema field from Sanity Studio).
 - Cleaned up email contact links in footer and navigation header to use consistent `mailto:info@okaloa.com` without pre-filled subjects.
 - Updated site meta description and `og:description` to `"Helping leaders de-risk strategic initiatives"`.
+- Fixed Sanity Studio pop-up auto-close issue when typing in image captions, links, or annotations by refactoring all PortableText annotations (`linkAnnotation`, `textColorAnnotation`, `fontSizeAnnotation`, `fontFamilyAnnotation`, `textAlignmentAnnotation`) and `imageBlock` into dedicated, registered top-level schema types in Sanity Studio schema registry.
+- Removed gray borders, outlines, and box shadows from all uploaded Sanity images (`global.css`, `SectionBlock.astro`, `index.astro`) to render images clean as-is.
+- Fixed text color overriding by removing `!important` from parent paragraph hero selectors and elevating text color CSS class specificity across all HTML elements.
+- Performed Legal & GDPR compliance audit (confirmed no tracking cookies/pixels are set, no cookie banner is required, company VAT/address is present in footer).
 
 ## 🏗 In Progress
 - Align styling to match CultureX aesthetics (dark theme, crisp serif/sans headings, sticky header).

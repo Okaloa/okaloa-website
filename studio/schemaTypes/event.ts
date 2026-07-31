@@ -1,5 +1,4 @@
 import {defineType, defineField} from 'sanity'
-import {richTextBlock} from './sectionContent'
 
 export default defineType({
   name: 'event',
@@ -24,8 +23,7 @@ export default defineType({
     defineField({
       name: 'description',
       title: 'Event Description',
-      type: 'array',
-      of: richTextBlock,
+      type: 'richText',
       description: 'Rich text description with links, formatting, and formatting options.'
     }),
     defineField({

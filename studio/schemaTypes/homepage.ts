@@ -1,5 +1,4 @@
 import {defineType, defineField} from 'sanity'
-import {richTextBlock} from './sectionContent'
 
 export default defineType({
   name: 'homepage',
@@ -64,15 +63,13 @@ export default defineType({
     defineField({
       name: 'eventsSectionText',
       title: 'Upcoming Events Section Description / Subheader (Optional)',
-      type: 'array',
-      of: richTextBlock,
+      type: 'richText',
       description: 'Optional rich text block underneath the Upcoming Events title.'
     }),
     defineField({
       name: 'eventsEmptyText',
       title: 'No Upcoming Events Message (Optional)',
-      type: 'array',
-      of: richTextBlock,
+      type: 'richText',
       description: 'Message displayed when there are no upcoming events. Leave blank if you do not want to show any message.'
     }),
     defineField({
@@ -104,8 +101,7 @@ export default defineType({
             defineField({
               name: 'description',
               title: 'Event Description',
-              type: 'array',
-              of: richTextBlock,
+              type: 'richText',
               description: 'Rich text description with links, bold, lists, and formatting options.'
             }),
             defineField({
@@ -135,8 +131,7 @@ export default defineType({
     defineField({
       name: 'footerTagline',
       title: 'Footer Tagline / Text Under Logo',
-      type: 'array',
-      of: richTextBlock,
+      type: 'richText',
       description: 'Text block displayed underneath the Okaloa logo in the website footer. Supports multiple paragraphs, newlines, formatting, and links.'
     }),
   ]

@@ -66,6 +66,9 @@ function renderChildren(block: any): string {
         text = `<s>${text}</s>`;
       } else if (markKey === 'code') {
         text = `<code>${text}</code>`;
+      } else if (markKey.startsWith('color-')) {
+        const colorName = markKey.replace('color-', '');
+        text = `<span class="text-color-${colorName}">${text}</span>`;
       } else if (markDefsMap[markKey]) {
         const def = markDefsMap[markKey];
         if (def._type === 'link') {
@@ -81,7 +84,7 @@ function renderChildren(block: any): string {
           const fontClass = `font-family-${def.family || 'sans'}`;
           text = `<span class="${fontClass}">${text}</span>`;
         } else if (def._type === 'textColor') {
-          const colorClass = `text-color-${def.color || 'default'}`;
+          const colorClass = `text-color-${def.color || 'brand-red'}`;
           text = `<span class="${colorClass}">${text}</span>`;
         } else if (def._type === 'fontSize') {
           const sizeClass = `text-size-${def.size || 'md'}`;
@@ -143,7 +146,7 @@ export function portableTextToHtml(blocks: any): string {
     }
 
     // 3. Embedded Image element
-    if (block._type === 'image') {
+    if (block._type === 'image' || block._type === 'imageBlock') {
       closeList();
       const imgUrl = urlForImage(block);
       if (imgUrl) {
