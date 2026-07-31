@@ -81,17 +81,21 @@ function renderChildren(block: any): string {
           const target = def.blank ? ' target="_blank" rel="noopener noreferrer"' : '';
           text = `<a href="${escapeHtml(href)}"${target} class="content-link">${text}</a>`;
         } else if (def._type === 'fontFamily') {
-          const fontClass = `font-family-${def.family || 'sans'}`;
-          text = `<span class="${fontClass}">${text}</span>`;
+          if (def.family && def.family !== 'default') {
+            text = `<span class="font-family-${def.family}">${text}</span>`;
+          }
         } else if (def._type === 'textColor') {
-          const colorClass = `text-color-${def.color || 'brand-red'}`;
-          text = `<span class="${colorClass}">${text}</span>`;
+          if (def.color && def.color !== 'default' && def.color !== 'none') {
+            text = `<span class="text-color-${def.color}">${text}</span>`;
+          }
         } else if (def._type === 'fontSize') {
-          const sizeClass = `text-size-${def.size || 'md'}`;
-          text = `<span class="${sizeClass}">${text}</span>`;
+          if (def.size && def.size !== 'default') {
+            text = `<span class="text-size-${def.size}">${text}</span>`;
+          }
         } else if (def._type === 'textAlignment') {
-          const alignClass = `text-align-${def.alignment || 'left'}`;
-          text = `<span class="${alignClass}">${text}</span>`;
+          if (def.alignment && def.alignment !== 'default') {
+            text = `<span class="text-align-${def.alignment}">${text}</span>`;
+          }
         }
       }
     }

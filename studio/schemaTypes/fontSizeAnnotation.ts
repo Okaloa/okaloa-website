@@ -9,9 +9,9 @@ export default defineType({
       name: 'size',
       type: 'string',
       title: 'Size',
-      initialValue: 'md',
       options: {
         list: [
+          {title: 'Default (Inherit)', value: 'default'},
           {title: 'Tiny (XXS)', value: 'xxs'},
           {title: 'Extra Small (XS)', value: 'xs'},
           {title: 'Small', value: 'sm'},

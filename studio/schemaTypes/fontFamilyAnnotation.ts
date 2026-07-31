@@ -9,9 +9,9 @@ export default defineType({
       name: 'family',
       type: 'string',
       title: 'Font Family',
-      initialValue: 'sans',
       options: {
         list: [
+          {title: 'Default (Standard)', value: 'default'},
           {title: 'Museo Sans (Standard)', value: 'sans'},
           {title: 'Serif (Fallback)', value: 'serif'},
           {title: 'Monospace (Code / Tech)', value: 'mono'},

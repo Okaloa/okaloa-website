@@ -9,9 +9,9 @@ export default defineType({
       name: 'color',
       type: 'string',
       title: 'Color',
-      initialValue: 'brand-red',
       options: {
         list: [
+          {title: 'Default / None (Inherit)', value: 'default'},
           {title: 'Okaloa Red (Brand Accent)', value: 'brand-red'},
           {title: 'Muted Gray', value: 'muted'},
           {title: 'Dark Charcoal', value: 'dark'},
