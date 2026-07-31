@@ -82,6 +82,9 @@ export default defineType({
           type: 'object',
           name: 'eventItem',
           title: 'Event',
+          options: {
+            modal: { type: 'dialog', width: 'medium' }
+          },
           fields: [
             defineField({
               name: 'title',

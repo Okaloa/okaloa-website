@@ -4,8 +4,8 @@ import imageUrlBuilder from '@sanity/image-url'
 export const sanityClient = createClient({
   projectId: 'b7wqv3yo',
   dataset: 'production',
-  useCdn: false, // Set to false to bypass cache and get fresh content immediately in development
-  apiVersion: '2024-01-01'
+  useCdn: import.meta.env.PROD, // true in production (CDN cache = faster), false in dev (always fresh)
+  apiVersion: '2025-07-01'
 })
 
 const builder = imageUrlBuilder(sanityClient)

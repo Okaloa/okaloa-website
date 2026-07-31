@@ -1,91 +1,34 @@
 ---
-import { portableTextToHtml, urlForImage } from '../utils/sanity';
+import { portableTextToHtml } from '../utils/sanity';
 
 interface Props {
   id: string;
   title: string;
   section?: {
     content?: any[];
-    text1?: any[];
-    image1?: any;
-    text2?: any[];
-    image2?: any;
-    text3?: any[];
   };
   bgClass?: string;
 }
 
 const { id, title, section, bgClass = 'section-light' } = Astro.props;
 
-const content = section?.content;
-
-const text1 = section?.text1;
-const image1Url = section?.image1 ? urlForImage(section.image1) : null;
-const image1Alt = section?.image1?.alt || `${title} Image 1`;
-const image1Caption = section?.image1?.caption;
-
-const text2 = section?.text2;
-const image2Url = section?.image2 ? urlForImage(section.image2) : null;
-const image2Alt = section?.image2?.alt || `${title} Image 2`;
-const image2Caption = section?.image2?.caption;
-
-const text3 = section?.text3;
+const content = Array.isArray(section) ? section : section?.content;
 ---
 
 <section class={`section ${bgClass}`} id={id}>
   <div class="container-narrow">
     <h2>{title}</h2>
-    <div class="section-content section-grid-layout">
-      {content && content.length > 0 ? (
-        <div class="block-text single-content-flow">
+    <div class="section-content">
+      {content && content.length > 0 && (
+        <div class="block-text">
           <Fragment set:html={portableTextToHtml(content)} />
         </div>
-      ) : (
-        <>
-          {text1 && text1.length > 0 && (
-            <div class="block-text text-1">
-              <Fragment set:html={portableTextToHtml(text1)} />
-            </div>
-          )}
-
-          {image1Url && (
-            <figure class="block-image image-1">
-              <img src={image1Url} alt={image1Alt} loading="lazy" />
-              {image1Caption && <figcaption>{image1Caption}</figcaption>}
-            </figure>
-          )}
-
-          {text2 && text2.length > 0 && (
-            <div class="block-text text-2">
-              <Fragment set:html={portableTextToHtml(text2)} />
-            </div>
-          )}
-
-          {image2Url && (
-            <figure class="block-image image-2">
-              <img src={image2Url} alt={image2Alt} loading="lazy" />
-              {image2Caption && <figcaption>{image2Caption}</figcaption>}
-            </figure>
-          )}
-
-          {text3 && text3.length > 0 && (
-            <div class="block-text text-3">
-              <Fragment set:html={portableTextToHtml(text3)} />
-            </div>
-          )}
-        </>
       )}
     </div>
   </div>
 </section>
 
 <style>
-  .section-grid-layout {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-  }
-
   .block-text :global(p) {
     font-size: 1.15rem;
     line-height: 1.75;
@@ -95,23 +38,5 @@ const text3 = section?.text3;
 
   .block-text :global(p:last-child) {
     margin-bottom: 0;
-  }
-
-  .block-image {
-    margin: var(--space-sm) 0;
-    width: 100%;
-    overflow: hidden;
-    box-shadow: none !important;
-    border: none !important;
-  }
-
-  .block-image img {
-    width: 100%;
-    height: auto;
-    max-height: 480px;
-    object-fit: cover;
-    display: block;
-    box-shadow: none !important;
-    border: none !important;
   }
 </style>

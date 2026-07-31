@@ -27,13 +27,16 @@ const {
     <!-- SEO Optimization -->
     <title>Okaloa</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={Astro.url.href} />
     <meta property="og:title" content="Okaloa" />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    
-    <!-- Google Fonts Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:image" content={`${Astro.url.origin}/images/okaloa-logo-dark.png`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Okaloa" />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${Astro.url.origin}/images/okaloa-logo-dark.png`} />
   </head>
   <body>
     <!-- Sticky Navigation Header (Scroll-sensitive) -->

@@ -9,7 +9,6 @@ import quote from './quote'
 import sectionContent from './sectionContent'
 import richText from './richText'
 import homepage from './homepage'
-import event from './event'
 
 export const schemaTypes = [
   linkAnnotation,
@@ -23,5 +22,4 @@ export const schemaTypes = [
   sectionContent,
   richText,
   homepage,
-  event
 ]

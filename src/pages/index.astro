@@ -3,10 +3,9 @@ export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
 import SectionBlock from '../components/SectionBlock.astro';
-import { sanityClient, portableTextToHtml, urlForImage } from '../utils/sanity';
+import { sanityClient, portableTextToHtml } from '../utils/sanity';
 
 let content = null;
-let events = [];
 
 try {
   content = await sanityClient.fetch(`*[_type == "homepage" && (_id == "homepage" || _id == "drafts.homepage")] | order(_updatedAt desc)[0]{
@@ -16,40 +15,29 @@ try {
     engageSection,
     whenSection,
     workingSection,
-    extraSection,
     aboutSection,
     eventsSectionText,
     eventsEmptyText,
     events,
     footerTagline
   }`);
-  
-  events = await sanityClient.fetch(`*[_type == "event"] | order(date asc){
-    "id": _id,
-    title,
-    date,
-    description,
-    link
-  }`);
 } catch (e) {
   console.error("Failed to fetch content from Sanity CMS:", e);
 }
 
 const homepage = content || {};
-const standaloneEvents = events || [];
 
 const heroHeadline = homepage.heroHeadline;
 const heroSec = homepage.heroSection;
 const deriskingSec = homepage.deriskingSection;
 const engageSec = homepage.engageSection;
 const whenSec = homepage.whenSection;
-const workingSec = homepage.workingSection || homepage.extraSection;
+const workingSec = homepage.workingSection;
 const aboutSec = homepage.aboutSection;
 
 const eventsSectionText = homepage.eventsSectionText || '';
 const eventsEmptyText = homepage.eventsEmptyText || '';
-const homepageEvents = homepage.events || [];
-const finalEvents = homepageEvents.length > 0 ? homepageEvents : standaloneEvents;
+const finalEvents = homepage.events || [];
 
 const footerTagline = homepage.footerTagline || "Helping leaders de-risk strategic initiatives\n\nA good strategy doesn't reliably turn into value. The gap exists because of unaddressed risk. De-risking closes that gap.";
 ---
@@ -73,39 +61,11 @@ const footerTagline = homepage.footerTagline || "Helping leaders de-risk strateg
       {/* Hero Section Content Layout: main content stream or legacy text1/image1/text2/image2/text3 */}
       {heroSec && (
         <div class="hero-content-flow">
-          {heroSec.content && heroSec.content.length > 0 ? (
-            <div class="hero-text">
-              <Fragment set:html={portableTextToHtml(heroSec.content)} />
-            </div>
-          ) : (
-            <>
-              {heroSec.text1 && heroSec.text1.length > 0 && (
-                <div class="hero-text">
-                  <Fragment set:html={portableTextToHtml(heroSec.text1)} />
-                </div>
-              )}
-              {heroSec.image1 && (
-                <div class="hero-image">
-                  <img src={urlForImage(heroSec.image1)} alt={heroSec.image1?.alt || 'Hero Image'} />
-                </div>
-              )}
-              {heroSec.text2 && heroSec.text2.length > 0 && (
-                <div class="hero-text">
-                  <Fragment set:html={portableTextToHtml(heroSec.text2)} />
-                </div>
-              )}
-              {heroSec.image2 && (
-                <div class="hero-image">
-                  <img src={urlForImage(heroSec.image2)} alt={heroSec.image2?.alt || 'Hero Image'} />
-                </div>
-              )}
-              {heroSec.text3 && heroSec.text3.length > 0 && (
-                <div class="hero-text">
-                  <Fragment set:html={portableTextToHtml(heroSec.text3)} />
-                </div>
-              )}
-            </>
-          )}
+          <div class="hero-text">
+            <Fragment set:html={portableTextToHtml(
+              Array.isArray(heroSec) ? heroSec : heroSec.content
+            )} />
+          </div>
         </div>
       )}
 
@@ -191,7 +151,7 @@ const footerTagline = homepage.footerTagline || "Helping leaders de-risk strateg
                 </div>
               )}
               {event.link && (
-                <a href={event.link} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm event-link" id={`btn-event-${event.id || event._id}`}>
+                <a href={event.link} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm event-link" id={`btn-event-${event._key}`}>
                   Register Now &rarr;
                 </a>
               )}
