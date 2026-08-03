@@ -4,7 +4,7 @@ import imageUrlBuilder from '@sanity/image-url'
 export const sanityClient = createClient({
   projectId: 'b7wqv3yo',
   dataset: 'production',
-  useCdn: import.meta.env.PROD, // true in production (CDN cache = faster), false in dev (always fresh)
+  useCdn: false, // false to ensure published changes appear immediately on refresh
   apiVersion: '2025-07-01'
 })
 
