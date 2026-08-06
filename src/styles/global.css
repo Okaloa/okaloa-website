@@ -387,6 +387,14 @@ a:hover {
 .text-size-lg { font-size: 1.35rem !important; }
 .text-size-xl { font-size: 1.6rem !important; }
 
+/* Line Spacing Classes */
+.line-spacing-tight      { line-height: 1.2 !important; display: inline-block; }
+.line-spacing-snug       { line-height: 1.4 !important; display: inline-block; }
+.line-spacing-normal     { line-height: 1.65 !important; display: inline-block; }
+.line-spacing-relaxed    { line-height: 1.9 !important; display: inline-block; }
+.line-spacing-loose      { line-height: 2.2 !important; display: inline-block; }
+.line-spacing-extra-loose{ line-height: 2.6 !important; display: inline-block; }
+
 .text-color-brand-red, p .text-color-brand-red, div .text-color-brand-red { color: var(--color-brand-red) !important; }
 .text-color-muted, p .text-color-muted, div .text-color-muted { color: var(--color-text-dark-muted) !important; }
 .text-color-dark, p .text-color-dark, div .text-color-dark { color: var(--color-text-dark) !important; }

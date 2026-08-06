@@ -96,6 +96,10 @@ function renderChildren(block: any): string {
           if (def.alignment && def.alignment !== 'default') {
             text = `<span class="text-align-${def.alignment}">${text}</span>`;
           }
+        } else if (def._type === 'lineSpacing') {
+          if (def.spacing && def.spacing !== 'default') {
+            text = `<span class="line-spacing-${def.spacing}">${text}</span>`;
+          }
         }
       }
     }

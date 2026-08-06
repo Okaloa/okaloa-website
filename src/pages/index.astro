@@ -71,7 +71,8 @@ const footerTagline = homepage.footerTagline || "Helping leaders de-risk strateg
 
       <div class="scroll-down-container">
         <a href="#de-risking" class="scroll-down-btn" aria-label="Scroll to De-risking section">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          Discover How
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="m6 9 6 6 6-6"/>
           </svg>
         </a>
@@ -238,37 +239,20 @@ const footerTagline = homepage.footerTagline || "Helping leaders de-risk strateg
   .scroll-down-btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    gap: 0.4rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    background: var(--color-brand-red);
     color: var(--color-neutral-white);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    animation: scroll-bounce 2.2s infinite;
-    cursor: pointer;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
   }
 
   .scroll-down-btn:hover {
-    background: var(--color-brand-red);
-    border-color: var(--color-brand-red);
-    color: var(--color-neutral-white);
-    transform: translateY(3px) scale(1.05);
-    box-shadow: 0 8px 24px rgba(227, 89, 61, 0.4);
-    animation-play-state: paused;
-  }
-
-  @keyframes scroll-bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(6px);
-    }
-    60% {
-      transform: translateY(3px);
-    }
+    background: var(--color-brand-red-hover);
+    transform: translateY(-1px);
   }
   
   /* Events Grid Styling */

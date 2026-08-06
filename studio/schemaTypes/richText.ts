@@ -37,6 +37,7 @@ export default defineType({
           {name: 'fontSize', type: 'fontSize'},
           {name: 'fontFamily', type: 'fontFamily'},
           {name: 'textAlignment', type: 'textAlignment'},
+          {name: 'lineSpacing', type: 'lineSpacing'},
         ]
       }
     }),

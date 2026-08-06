@@ -3,6 +3,7 @@ import textColorAnnotation from './textColorAnnotation'
 import fontSizeAnnotation from './fontSizeAnnotation'
 import fontFamilyAnnotation from './fontFamilyAnnotation'
 import textAlignmentAnnotation from './textAlignmentAnnotation'
+import lineSpacingAnnotation from './lineSpacingAnnotation'
 import imageBlock from './imageBlock'
 import separator from './separator'
 import quote from './quote'
@@ -16,6 +17,7 @@ export const schemaTypes = [
   fontSizeAnnotation,
   fontFamilyAnnotation,
   textAlignmentAnnotation,
+  lineSpacingAnnotation,
   imageBlock,
   separator,
   quote,
