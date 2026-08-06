@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy:website": "vercel --prod",
+    "deploy:website": "npx vercel --prod",
     "deploy:studio": "npm --prefix studio run deploy",
     "deploy": "npm run deploy:website && npm run deploy:studio"
   },
