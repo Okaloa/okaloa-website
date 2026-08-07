@@ -11,10 +11,17 @@ try {
   content = await sanityClient.fetch(`*[_type == "homepage" && (_id == "homepage" || _id == "drafts.homepage")] | order(_updatedAt desc)[0]{
     heroHeadline,
     heroSection,
+    typesOfRiskTitle,
+    typesOfRiskSection,
+    deriskingTitle,
     deriskingSection,
+    engageTitle,
     engageSection,
+    whenTitle,
     whenSection,
+    workingTitle,
     workingSection,
+    aboutTitle,
     aboutSection,
     eventsSectionText,
     eventsEmptyText,
@@ -29,6 +36,7 @@ const homepage = content || {};
 
 const heroHeadline = homepage.heroHeadline;
 const heroSec = homepage.heroSection;
+const typesOfRiskSec = homepage.typesOfRiskSection;
 const deriskingSec = homepage.deriskingSection;
 const engageSec = homepage.engageSection;
 const whenSec = homepage.whenSection;
@@ -70,7 +78,7 @@ const footerTagline = homepage.footerTagline || "Helping leaders de-risk strateg
       )}
 
       <div class="scroll-down-container">
-        <a href="#de-risking" class="scroll-down-btn" aria-label="Scroll to De-risking section">
+        <a href="#types-of-risk" class="scroll-down-btn" aria-label="Scroll to Types of Risk section">
           Discover how
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="m6 9 6 6 6-6"/>
@@ -80,10 +88,20 @@ const footerTagline = homepage.footerTagline || "Helping leaders de-risk strateg
     </div>
   </header>
 
+  <!-- Types of Risk Section (not in nav) -->
+  <SectionBlock
+    id="types-of-risk"
+    title="The types of risk"
+    titleOverride={homepage.typesOfRiskTitle}
+    section={typesOfRiskSec}
+    bgClass="section-soft"
+  />
+
   <!-- De-risking Section -->
   <SectionBlock
     id="de-risking"
     title="De-risking"
+    titleOverride={homepage.deriskingTitle}
     section={deriskingSec}
     bgClass="section-light"
   />
@@ -92,6 +110,7 @@ const footerTagline = homepage.footerTagline || "Helping leaders de-risk strateg
   <SectionBlock
     id="how-we-engage"
     title="How we engage"
+    titleOverride={homepage.engageTitle}
     section={engageSec}
     bgClass="section-soft"
   />
@@ -100,6 +119,7 @@ const footerTagline = homepage.footerTagline || "Helping leaders de-risk strateg
   <SectionBlock
     id="is-this-for-you"
     title="Is this for you?"
+    titleOverride={homepage.whenTitle}
     section={whenSec}
     bgClass="section-light"
   />
@@ -108,6 +128,7 @@ const footerTagline = homepage.footerTagline || "Helping leaders de-risk strateg
   <SectionBlock
     id="its-working"
     title="It's working"
+    titleOverride={homepage.workingTitle}
     section={workingSec}
     bgClass="section-soft"
   />
@@ -116,6 +137,7 @@ const footerTagline = homepage.footerTagline || "Helping leaders de-risk strateg
   <SectionBlock
     id="about"
     title="About"
+    titleOverride={homepage.aboutTitle}
     section={aboutSec}
     bgClass="section-light"
   />

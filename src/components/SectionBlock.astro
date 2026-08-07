@@ -4,20 +4,22 @@ import { portableTextToHtml } from '../utils/sanity';
 interface Props {
   id: string;
   title: string;
+  titleOverride?: string;
   section?: {
     content?: any[];
   };
   bgClass?: string;
 }
 
-const { id, title, section, bgClass = 'section-light' } = Astro.props;
+const { id, title, titleOverride, section, bgClass = 'section-light' } = Astro.props;
+const displayTitle = titleOverride || title;
 
 const content = Array.isArray(section) ? section : section?.content;
 ---
 
 <section class={`section ${bgClass}`} id={id}>
   <div class="container-narrow">
-    <h2>{title}</h2>
+    <h2>{displayTitle}</h2>
     <div class="section-content">
       {content && content.length > 0 && (
         <div class="block-text">

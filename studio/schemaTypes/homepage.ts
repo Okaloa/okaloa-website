@@ -19,7 +19,27 @@ export default defineType({
       description: 'Hero section content block.'
     }),
 
+    // Types of Risk Section
+    defineField({
+      name: 'typesOfRiskTitle',
+      title: 'Types of Risk — Section Title',
+      type: 'string',
+      description: 'Heading displayed above the Types of Risk section. Defaults to "The types of risk".'
+    }),
+    defineField({
+      name: 'typesOfRiskSection',
+      title: 'Types of Risk Section',
+      type: 'sectionContent',
+      description: 'Content for the Types of Risk section.'
+    }),
+
     // De-risking Section
+    defineField({
+      name: 'deriskingTitle',
+      title: 'De-risking — Section Title',
+      type: 'string',
+      description: 'Heading for the De-risking section. Defaults to "De-risking".'
+    }),
     defineField({
       name: 'deriskingSection',
       title: 'De-risking Section',
@@ -29,6 +49,12 @@ export default defineType({
 
     // How We Engage Section
     defineField({
+      name: 'engageTitle',
+      title: 'How We Engage — Section Title',
+      type: 'string',
+      description: 'Heading for the How We Engage section. Defaults to "How we engage".'
+    }),
+    defineField({
       name: 'engageSection',
       title: 'How We Engage Section',
       type: 'sectionContent',
@@ -36,6 +62,12 @@ export default defineType({
     }),
 
     // Is This For You Section
+    defineField({
+      name: 'whenTitle',
+      title: 'Is This For You — Section Title',
+      type: 'string',
+      description: 'Heading for the Is This For You section. Defaults to "Is this for you?".'
+    }),
     defineField({
       name: 'whenSection',
       title: 'Is This For You Section',
@@ -45,6 +77,12 @@ export default defineType({
 
     // It's Working Section (Between Is This For You and About)
     defineField({
+      name: 'workingTitle',
+      title: 'It\'s Working — Section Title',
+      type: 'string',
+      description: 'Heading for the It\'s Working section. Defaults to "It\'s working".'
+    }),
+    defineField({
       name: 'workingSection',
       title: 'It\'s Working Section Content',
       type: 'sectionContent',
@@ -52,6 +90,12 @@ export default defineType({
     }),
 
     // About Section
+    defineField({
+      name: 'aboutTitle',
+      title: 'About — Section Title',
+      type: 'string',
+      description: 'Heading for the About section. Defaults to "About".'
+    }),
     defineField({
       name: 'aboutSection',
       title: 'About Section',
