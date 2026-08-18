@@ -33,6 +33,7 @@ export default defineType({
         ],
         annotations: [
           {name: 'link', type: 'link'},
+          {name: 'pdfDownload', type: 'pdfDownload'},
           {name: 'textColor', type: 'textColor'},
           {name: 'fontSize', type: 'fontSize'},
           {name: 'fontFamily', type: 'fontFamily'},

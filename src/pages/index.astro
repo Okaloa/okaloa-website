@@ -21,8 +21,6 @@ try {
     whenSection,
     workingTitle,
     workingSection,
-    aboutTitle,
-    aboutSection,
     eventsSectionText,
     eventsEmptyText,
     events,
@@ -41,7 +39,6 @@ const deriskingSec = homepage.deriskingSection;
 const engageSec = homepage.engageSection;
 const whenSec = homepage.whenSection;
 const workingSec = homepage.workingSection;
-const aboutSec = homepage.aboutSection;
 
 const eventsSectionText = homepage.eventsSectionText || '';
 const eventsEmptyText = homepage.eventsEmptyText || '';
@@ -131,15 +128,6 @@ const footerTagline = homepage.footerTagline || "Helping leaders de-risk strateg
     titleOverride={homepage.workingTitle}
     section={workingSec}
     bgClass="section-soft"
-  />
-
-  <!-- About Section -->
-  <SectionBlock
-    id="about"
-    title="About"
-    titleOverride={homepage.aboutTitle}
-    section={aboutSec}
-    bgClass="section-light"
   />
 
   <!-- Learn with us Section -->

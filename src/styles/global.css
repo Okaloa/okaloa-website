@@ -251,6 +251,15 @@ a:hover {
 
 /* --- Sanity Rich Text & Formatting Enhancements --- */
 
+/* Paragraphs inside rich text content blocks */
+.block-paragraph {
+  margin-bottom: 0.75em;
+  line-height: 1.75;
+}
+.block-paragraph:last-child {
+  margin-bottom: 0;
+}
+
 /* Lists (Bullet points & Numbered lists) */
 .content-list {
   margin: var(--space-xs) 0 var(--space-md) var(--space-md);
@@ -291,6 +300,23 @@ a:hover {
 .content-link:hover {
   color: var(--color-brand-red-hover);
   text-decoration-thickness: 2px;
+}
+
+/* PDF Download Link — unstyled by default so Sanity formatting applies freely */
+.pdf-download-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1.5px dashed currentColor;
+  padding-bottom: 1px;
+  transition: opacity 0.2s;
+}
+
+.pdf-download-link:hover {
+  opacity: 0.75;
+  text-decoration: none;
 }
 
 /* Line Separator Styles */
@@ -369,10 +395,10 @@ a:hover {
 }
 
 /* Alignments, Font Families, Font Sizes & Colors */
-.text-center, .text-align-center { text-align: center !important; display: block; width: 100%; }
-.text-left, .text-align-left { text-align: left !important; display: block; width: 100%; }
-.text-right, .text-align-right { text-align: right !important; display: block; width: 100%; }
-.text-justify, .text-align-justify { text-align: justify !important; display: block; width: 100%; }
+.text-center, .text-align-center { text-align: center !important; display: block; }
+.text-left, .text-align-left { text-align: left !important; display: block; }
+.text-right, .text-align-right { text-align: right !important; display: block; }
+.text-justify, .text-align-justify { text-align: justify !important; display: block; }
 
 /* Font Family Classes */
 .font-family-sans { font-family: var(--font-sans) !important; }
@@ -395,13 +421,13 @@ a:hover {
 .line-spacing-loose      { line-height: 2.2 !important; display: inline-block; }
 .line-spacing-extra-loose{ line-height: 2.6 !important; display: inline-block; }
 
-.text-color-brand-red, p .text-color-brand-red, div .text-color-brand-red { color: var(--color-brand-red) !important; }
-.text-color-muted, p .text-color-muted, div .text-color-muted { color: var(--color-text-dark-muted) !important; }
-.text-color-dark, p .text-color-dark, div .text-color-dark { color: var(--color-text-dark) !important; }
-.text-color-white, p .text-color-white, div .text-color-white { color: var(--color-neutral-white) !important; }
-.text-color-navy, p .text-color-navy, div .text-color-navy { color: #2b6cb0 !important; }
-.text-color-green, p .text-color-green, div .text-color-green { color: #2f855a !important; }
-.text-color-amber, p .text-color-amber, div .text-color-amber { color: #d97706 !important; }
+.text-color-brand-red, p .text-color-brand-red, div .text-color-brand-red, a .text-color-brand-red { color: var(--color-brand-red) !important; }
+.text-color-muted, p .text-color-muted, div .text-color-muted, a .text-color-muted { color: var(--color-text-dark-muted) !important; }
+.text-color-dark, p .text-color-dark, div .text-color-dark, a .text-color-dark { color: var(--color-text-dark) !important; }
+.text-color-white, p .text-color-white, div .text-color-white, a .text-color-white { color: var(--color-neutral-white) !important; }
+.text-color-navy, p .text-color-navy, div .text-color-navy, a .text-color-navy { color: #2b6cb0 !important; }
+.text-color-green, p .text-color-green, div .text-color-green, a .text-color-green { color: #2f855a !important; }
+.text-color-amber, p .text-color-amber, div .text-color-amber, a .text-color-amber { color: #d97706 !important; }
 
 .lead-text {
   font-size: 1.3rem !important;

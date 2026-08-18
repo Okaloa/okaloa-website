@@ -89,20 +89,6 @@ export default defineType({
       description: 'It\'s Working section content block.'
     }),
 
-    // About Section
-    defineField({
-      name: 'aboutTitle',
-      title: 'About — Section Title',
-      type: 'string',
-      description: 'Heading for the About section. Defaults to "About".'
-    }),
-    defineField({
-      name: 'aboutSection',
-      title: 'About Section',
-      type: 'sectionContent',
-      description: 'About section content block.'
-    }),
-
     // Upcoming Events Section Settings
     defineField({
       name: 'eventsSectionText',

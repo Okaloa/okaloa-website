@@ -2,6 +2,7 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {schemaTypes} from './schemaTypes'
 
+const SINGLETON_TYPES = new Set(['homepage', 'about'])
 const SINGLETON_ACTIONS = new Set(['publish', 'discardChanges', 'restore'])
 
 const myStructure = (S: any) =>
@@ -17,7 +18,18 @@ const myStructure = (S: any) =>
             .schemaType('homepage')
             .documentId('homepage')
             .title('Homepage Sections')
-        )
+        ),
+
+      // Single document for the About Page
+      S.listItem()
+        .title('About Page')
+        .id('about-singleton')
+        .child(
+          S.document()
+            .schemaType('about')
+            .documentId('about')
+            .title('About Page')
+        ),
     ])
 
 export default defineConfig({
@@ -40,10 +52,11 @@ export default defineConfig({
   document: {
     // For singleton types, filter out actions that are not allowed (like delete/duplicate)
     actions: (prev, context) => {
-      if (context.schemaType === 'homepage') {
+      if (SINGLETON_TYPES.has(context.schemaType)) {
         return prev.filter(({ action }) => action && SINGLETON_ACTIONS.has(action))
       }
       return prev
     },
   },
 })
+

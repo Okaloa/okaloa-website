@@ -1,4 +1,5 @@
 import linkAnnotation from './linkAnnotation'
+import pdfDownloadAnnotation from './pdfDownloadAnnotation'
 import textColorAnnotation from './textColorAnnotation'
 import fontSizeAnnotation from './fontSizeAnnotation'
 import fontFamilyAnnotation from './fontFamilyAnnotation'
@@ -10,9 +11,11 @@ import quote from './quote'
 import sectionContent from './sectionContent'
 import richText from './richText'
 import homepage from './homepage'
+import about from './about'
 
 export const schemaTypes = [
   linkAnnotation,
+  pdfDownloadAnnotation,
   textColorAnnotation,
   fontSizeAnnotation,
   fontFamilyAnnotation,
@@ -24,4 +27,5 @@ export const schemaTypes = [
   sectionContent,
   richText,
   homepage,
+  about,
 ]

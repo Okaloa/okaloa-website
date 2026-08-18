@@ -1,0 +1,86 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import { sanityClient, portableTextToHtml } from '../utils/sanity';
+
+let content = null;
+
+try {
+  content = await sanityClient.fetch(`*[_type == "about" && (_id == "about" || _id == "drafts.about")] | order(_updatedAt desc)[0]{
+    aboutTitle,
+    aboutSection
+  }`);
+} catch (e) {
+  console.error("Failed to fetch About page content from Sanity CMS:", e);
+}
+
+const aboutPage = content || {};
+
+const footerTagline = await sanityClient.fetch(
+  `*[_type == "homepage" && (_id == "homepage" || _id == "drafts.homepage")] | order(_updatedAt desc)[0]{ footerTagline }.footerTagline`
+).catch(() => null);
+---
+
+<Layout
+  title="About — Okaloa"
+  description="Learn more about Okaloa and who we are."
+  footerTagline={footerTagline}
+>
+  <!-- Page Hero -->
+  <header class="about-hero">
+    <div class="about-hero-overlay"></div>
+    <div class="container about-hero-inner">
+      <h1 class="about-hero-headline">
+        {aboutPage.aboutTitle || 'About'}
+      </h1>
+    </div>
+  </header>
+
+  <!-- About Content -->
+  <SectionBlock
+    id="about"
+    title="About"
+    titleOverride={aboutPage.aboutTitle}
+    section={aboutPage.aboutSection}
+    bgClass="section-light"
+  />
+</Layout>
+
+<style>
+  /* About page hero — compact, matches overall dark theme */
+  .about-hero {
+    position: relative;
+    min-height: 38vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 10rem 2rem 4rem;
+    background-color: var(--color-bg-dark-hero);
+    overflow: hidden;
+  }
+
+  .about-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 60% 50%, rgba(227, 89, 61, 0.1) 0%, rgba(37, 52, 55, 0) 65%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .about-hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: var(--container-narrow-width);
+    width: 100%;
+  }
+
+  .about-hero-headline {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--color-neutral-white);
+    margin-bottom: 0;
+  }
+</style>

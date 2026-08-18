@@ -51,7 +51,13 @@ function renderChildren(block: any): string {
     if (text) {
       text = text.replace(/\n/g, '<br />');
     }
+    // If the text is empty or only whitespace/line-breaks, don't wrap it in
+    // formatting marks — doing so (e.g. <strong><br /></strong>) produces
+    // spurious new lines when Sanity emits boundary spans around bold text.
     if (!child.marks || !Array.isArray(child.marks) || child.marks.length === 0) {
+      return text;
+    }
+    if (!child.text || !child.text.trim()) {
       return text;
     }
 
@@ -93,8 +99,22 @@ function renderChildren(block: any): string {
             text = `<span class="text-size-${def.size}">${text}</span>`;
           }
         } else if (def._type === 'textAlignment') {
-          if (def.alignment && def.alignment !== 'default') {
-            text = `<span class="text-align-${def.alignment}">${text}</span>`;
+          // Alignment is applied at the paragraph level (see portableTextToHtml),
+          // never as an inline span — so we skip wrapping here intentionally.
+        } else if (def._type === 'pdfDownload') {
+          // Build CDN URL from Sanity file asset reference
+          // ref format: "file-{hash}-pdf" → https://cdn.sanity.io/files/{projectId}/{dataset}/{hash}.pdf
+          const assetRef = def.file?.asset?._ref || '';
+          let pdfUrl = '';
+          if (assetRef) {
+            const parts = assetRef.replace(/^file-/, '').split('-');
+            const ext = parts.pop(); // last part is the extension (e.g. "pdf")
+            const hash = parts.join('-');
+            pdfUrl = `https://cdn.sanity.io/files/b7wqv3yo/production/${hash}.${ext}`;
+          }
+          if (pdfUrl) {
+            const dlAttr = def.filename ? ` download="${escapeHtml(def.filename)}"` : ' download';
+            text = `<a href="${pdfUrl}"${dlAttr} class="content-link pdf-download-link" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline;vertical-align:-1px;margin-right:3px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>${text}</a>`;
           }
         } else if (def._type === 'lineSpacing') {
           if (def.spacing && def.spacing !== 'default') {
@@ -192,10 +212,18 @@ export function portableTextToHtml(blocks: any): string {
         }
         const style = block.style || 'normal';
         let alignClass = '';
-        if (style === 'center') alignClass = ' text-center';
-        else if (style === 'right') alignClass = ' text-right';
-        else if (style === 'left') alignClass = ' text-left';
-        else if (style === 'justify') alignClass = ' text-justify';
+        if (style === 'center') alignClass = ' text-align-center';
+        else if (style === 'right') alignClass = ' text-align-right';
+        else if (style === 'left') alignClass = ' text-align-left';
+        else if (style === 'justify') alignClass = ' text-align-justify';
+
+        // Also pick up textAlignment annotation if applied to any child span
+        if (!alignClass && block.markDefs && Array.isArray(block.markDefs)) {
+          const alignDef = block.markDefs.find(
+            (def: any) => def._type === 'textAlignment' && def.alignment && def.alignment !== 'default'
+          );
+          if (alignDef) alignClass = ` text-align-${alignDef.alignment}`;
+        }
 
         let tag = 'p';
         if (style === 'h2') tag = 'h2';

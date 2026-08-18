@@ -31,14 +31,16 @@ const content = Array.isArray(section) ? section : section?.content;
 </section>
 
 <style>
-  .block-text :global(p) {
+  .block-text :global(p),
+  .block-text :global(.block-paragraph) {
     font-size: 1.15rem;
     line-height: 1.75;
     color: var(--color-text-dark-muted);
-    margin-bottom: var(--space-sm);
+    margin-bottom: 0.5em;
   }
 
-  .block-text :global(p:last-child) {
+  .block-text :global(p:last-child),
+  .block-text :global(.block-paragraph:last-child) {
     margin-bottom: 0;
   }
 </style>
