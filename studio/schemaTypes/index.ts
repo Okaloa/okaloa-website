@@ -12,6 +12,7 @@ import sectionContent from './sectionContent'
 import richText from './richText'
 import homepage from './homepage'
 import about from './about'
+import flowlab from './flowlab'
 
 export const schemaTypes = [
   linkAnnotation,
@@ -28,4 +29,5 @@ export const schemaTypes = [
   richText,
   homepage,
   about,
+  flowlab,
 ]

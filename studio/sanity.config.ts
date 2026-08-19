@@ -2,7 +2,7 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {schemaTypes} from './schemaTypes'
 
-const SINGLETON_TYPES = new Set(['homepage', 'about'])
+const SINGLETON_TYPES = new Set(['homepage', 'about', 'flowlab'])
 const SINGLETON_ACTIONS = new Set(['publish', 'discardChanges', 'restore'])
 
 const myStructure = (S: any) =>
@@ -18,6 +18,17 @@ const myStructure = (S: any) =>
             .schemaType('homepage')
             .documentId('homepage')
             .title('Homepage Sections')
+        ),
+
+      // Single document for the Okaloa Flowlab Page
+      S.listItem()
+        .title('Okaloa Flowlab Page')
+        .id('flowlab-singleton')
+        .child(
+          S.document()
+            .schemaType('flowlab')
+            .documentId('flowlab')
+            .title('Okaloa Flowlab Page')
         ),
 
       // Single document for the About Page
