@@ -1,9 +1,12 @@
 import {createClient} from '@sanity/client'
 import imageUrlBuilder from '@sanity/image-url'
 
+const SANITY_PROJECT_ID = import.meta.env.PUBLIC_SANITY_PROJECT_ID || 'b7wqv3yo';
+const SANITY_DATASET = import.meta.env.PUBLIC_SANITY_DATASET || 'production';
+
 export const sanityClient = createClient({
-  projectId: 'b7wqv3yo',
-  dataset: 'production',
+  projectId: SANITY_PROJECT_ID,
+  dataset: SANITY_DATASET,
   useCdn: false, // false to ensure published changes appear immediately on refresh
   apiVersion: '2025-07-01'
 })
@@ -110,7 +113,7 @@ function renderChildren(block: any): string {
             const parts = assetRef.replace(/^file-/, '').split('-');
             const ext = parts.pop(); // last part is the extension (e.g. "pdf")
             const hash = parts.join('-');
-            pdfUrl = `https://cdn.sanity.io/files/b7wqv3yo/production/${hash}.${ext}`;
+            pdfUrl = `https://cdn.sanity.io/files/${SANITY_PROJECT_ID}/${SANITY_DATASET}/${hash}.${ext}`;
           }
           if (pdfUrl) {
             const dlAttr = def.filename ? ` download="${escapeHtml(def.filename)}"` : ' download';
