@@ -5,5 +5,8 @@ export default defineCliConfig({
     projectId: 'b7wqv3yo',
     dataset: 'production'
   },
-  studioHost: 'okaloa'
+  studioHost: 'okaloa',
+  deployment: {
+    appId: 'w1hb8jk0h7q2nkbs3uqce9ho',
+  },
 })
