@@ -1,0 +1,50 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import { sanityClient, portableTextToHtml } from '../utils/sanity';
+
+let content = null;
+
+try {
+  content = await sanityClient.fetch(`*[_type == "training" && (_id == "training" || _id == "drafts.training")] | order(_updatedAt desc)[0]{
+    trainingTitle,
+    trainingSection
+  }`);
+} catch (e) {
+  console.error("Failed to fetch Training page content from Sanity CMS:", e);
+}
+
+const trainingPage = content || {};
+
+const footerTagline = await sanityClient.fetch(
+  `*[_type == "homepage" && (_id == "homepage" || _id == "drafts.homepage")] | order(_updatedAt desc)[0]{ footerTagline }.footerTagline`
+).catch(() => null);
+---
+
+<Layout
+  title="Training — Okaloa"
+  description="Learn more about Okaloa's Training."
+  footerTagline={footerTagline}
+>
+  <!-- Header backdrop (dark strip behind sticky nav only) -->
+  <header class="training-hero"></header>
+
+  <!-- Training Content -->
+  <SectionBlock
+    id="training"
+    title="Training"
+    titleOverride={trainingPage.trainingTitle}
+    section={trainingPage.trainingSection}
+    bgClass="section-light"
+  />
+</Layout>
+
+<style>
+  /* Dark backdrop sized to match the sticky nav only — page content below is light */
+  .training-hero {
+    height: 6.5rem;
+    background-color: var(--color-bg-dark-hero);
+  }
+</style>

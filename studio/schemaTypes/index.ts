@@ -13,6 +13,8 @@ import richText from './richText'
 import homepage from './homepage'
 import about from './about'
 import flowlab from './flowlab'
+import workshop from './workshop'
+import training from './training'
 
 export const schemaTypes = [
   linkAnnotation,
@@ -30,4 +32,6 @@ export const schemaTypes = [
   homepage,
   about,
   flowlab,
+  workshop,
+  training,
 ]

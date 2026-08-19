@@ -1,0 +1,50 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import { sanityClient, portableTextToHtml } from '../utils/sanity';
+
+let content = null;
+
+try {
+  content = await sanityClient.fetch(`*[_type == "workshop" && (_id == "workshop" || _id == "drafts.workshop")] | order(_updatedAt desc)[0]{
+    workshopTitle,
+    workshopSection
+  }`);
+} catch (e) {
+  console.error("Failed to fetch Workshop page content from Sanity CMS:", e);
+}
+
+const workshopPage = content || {};
+
+const footerTagline = await sanityClient.fetch(
+  `*[_type == "homepage" && (_id == "homepage" || _id == "drafts.homepage")] | order(_updatedAt desc)[0]{ footerTagline }.footerTagline`
+).catch(() => null);
+---
+
+<Layout
+  title="Workshop — Okaloa"
+  description="Learn more about Okaloa's Workshop."
+  footerTagline={footerTagline}
+>
+  <!-- Header backdrop (dark strip behind sticky nav only) -->
+  <header class="workshop-hero"></header>
+
+  <!-- Workshop Content -->
+  <SectionBlock
+    id="workshop"
+    title="Workshop"
+    titleOverride={workshopPage.workshopTitle}
+    section={workshopPage.workshopSection}
+    bgClass="section-light"
+  />
+</Layout>
+
+<style>
+  /* Dark backdrop sized to match the sticky nav only — page content below is light */
+  .workshop-hero {
+    height: 6.5rem;
+    background-color: var(--color-bg-dark-hero);
+  }
+</style>
