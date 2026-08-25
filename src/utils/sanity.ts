@@ -87,6 +87,10 @@ function renderChildren(block: any): string {
               href = `mailto:${href}`;
             }
           }
+          // Append ?subject= for mailto: links when a subject is provided
+          if (href.startsWith('mailto:') && def.subject) {
+            href += `?subject=${encodeURIComponent(def.subject)}`;
+          }
           const target = def.blank ? ' target="_blank" rel="noopener noreferrer"' : '';
           text = `<a href="${escapeHtml(href)}"${target} class="content-link">${text}</a>`;
         } else if (def._type === 'fontFamily') {
