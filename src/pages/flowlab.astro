@@ -9,8 +9,12 @@ let content = null;
 
 try {
   content = await sanityClient.fetch(`*[_type == "flowlab" && (_id == "flowlab" || _id == "drafts.flowlab")] | order(_updatedAt desc)[0]{
-    flowlabTitle,
-    flowlabSection
+    aboutFlowlabTitle,
+    aboutFlowlabSection,
+    pricingPhysicalTitle,
+    pricingPhysicalSection,
+    pricingOnlineTitle,
+    pricingOnlineSection
   }`);
 } catch (e) {
   console.error("Failed to fetch Flowlab page content from Sanity CMS:", e);
@@ -31,12 +35,30 @@ const footerTagline = await sanityClient.fetch(
   <!-- Header backdrop (dark strip behind sticky nav only) -->
   <header class="flowlab-hero"></header>
 
-  <!-- Flowlab Content -->
+  <!-- About Okaloa Flowlab Section -->
   <SectionBlock
-    id="flowlab"
-    title="Okaloa Flowlab"
-    titleOverride={flowlabPage.flowlabTitle}
-    section={flowlabPage.flowlabSection}
+    id="about-flowlab"
+    title="About Okaloa Flowlab"
+    titleOverride={flowlabPage.aboutFlowlabTitle}
+    section={flowlabPage.aboutFlowlabSection}
+    bgClass="section-light"
+  />
+
+  <!-- Pricing Physical Material Section -->
+  <SectionBlock
+    id="pricing-physical"
+    title="Pricing Physical material"
+    titleOverride={flowlabPage.pricingPhysicalTitle}
+    section={flowlabPage.pricingPhysicalSection}
+    bgClass="section-soft"
+  />
+
+  <!-- Pricing Online Version Section -->
+  <SectionBlock
+    id="pricing-online"
+    title="Pricing Online version"
+    titleOverride={flowlabPage.pricingOnlineTitle}
+    section={flowlabPage.pricingOnlineSection}
     bgClass="section-light"
   />
 </Layout>
