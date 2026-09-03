@@ -1,0 +1,87 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import SectionBlock from '../components/SectionBlock.astro';
+import { sanityClient, portableTextToHtml } from '../utils/sanity';
+
+let content = null;
+
+try {
+  content = await sanityClient.fetch(`*[_type == "deRiskingPoster" && (_id == "deRiskingPoster" || _id == "drafts.deRiskingPoster")] | order(_updatedAt desc)[0]{
+    posterTitle,
+    posterSection
+  }`);
+} catch (e) {
+  console.error("Failed to fetch De-risking Poster page content from Sanity CMS:", e);
+}
+
+const posterPage = content || {};
+
+const footerTagline = await sanityClient.fetch(
+  `*[_type == "homepage" && (_id == "homepage" || _id == "drafts.homepage")] | order(_updatedAt desc)[0]{ footerTagline }.footerTagline`
+).catch(() => null);
+---
+
+<Layout
+  title="De-risking Poster — Okaloa"
+  description="Okaloa de-risking poster."
+  footerTagline={footerTagline}
+>
+  <!-- Header backdrop (dark strip behind sticky nav only) -->
+  <header class="about-hero"></header>
+
+  <!-- De-risking Poster Content -->
+  <div class="poster-page">
+    <SectionBlock
+      id="de-risking-poster"
+      title="De-risking - Moving fast without breaking things"
+      titleOverride={posterPage.posterTitle}
+      section={posterPage.posterSection}
+      bgClass="section-light"
+    />
+  </div>
+</Layout>
+
+<style>
+  /* Dark backdrop sized to match the sticky nav only — page content below is light */
+  .about-hero {
+    height: 6.5rem;
+    background-color: var(--color-bg-dark-hero);
+  }
+
+  /* Center the page title */
+  :global(.poster-page h2) {
+    text-align: center;
+    font-size: 36px;
+  }
+
+  /* Break embedded images out of the narrow text column so they can grow well
+     beyond the title's width, while the breakout's own padding keeps a gap
+     from the window edges. Height is capped to the viewport so the whole
+     image is always visible without scrolling — the browser scales
+     width/height together (aspect ratio preserved) to whichever of the two
+     constraints (available width or available height) is tighter. The vh
+     allowance approximates the space taken by the nav, title and section
+     padding above/below the image. */
+  :global(.poster-page .content-embedded-image) {
+    width: 100vw;
+    max-width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 0 var(--space-lg);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+  }
+
+  :global(.poster-page .content-embedded-image img) {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(100vh - 18rem);
+  }
+</style>

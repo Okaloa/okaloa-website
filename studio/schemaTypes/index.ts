@@ -15,6 +15,7 @@ import about from './about'
 import flowlab from './flowlab'
 import workshop from './workshop'
 import training from './training'
+import deRiskingPoster from './deRiskingPoster'
 
 export const schemaTypes = [
   linkAnnotation,
@@ -34,4 +35,5 @@ export const schemaTypes = [
   flowlab,
   workshop,
   training,
+  deRiskingPoster,
 ]
