@@ -74,13 +74,12 @@ The homepage is a single scrollable page. Sections render in this order:
 | # | Section ID | Editable title in Sanity? | In nav? |
 |---|---|---|---|
 | 1 | `#hero` | Title via `heroHeadline` field | — |
-| 2 | `#types-of-risk` | Yes — `typesOfRiskTitle` | No |
-| 3 | `#de-risking` | Yes — `deriskingTitle` | Yes |
-| 4 | `#how-we-engage` | Yes — `engageTitle` | Yes |
-| 5 | `#is-this-for-you` | Yes — `whenTitle` | Yes |
-| 6 | `#its-working` | Yes — `workingTitle` | Yes |
-| 7 | `#about` | Yes — `aboutTitle` | Yes |
-| 8 | `#events` | Fixed to "Upcoming Events" | Yes |
+| 2 | `#de-risking` | Yes — `deriskingTitle` | Yes |
+| 3 | `#how-we-engage` | Yes — `engageTitle` | Yes |
+| 4 | `#is-this-for-you` | Yes — `whenTitle` | Yes |
+| 5 | `#its-working` | Yes — `workingTitle` | Yes |
+| 6 | `#about` | Yes — `aboutTitle` | Yes |
+| 7 | `#events` | Fixed to "Upcoming Events" | Yes |
 
 If a title field is left blank in Sanity, the hardcoded default is used automatically.
 

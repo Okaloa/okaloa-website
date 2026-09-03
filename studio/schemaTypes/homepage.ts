@@ -19,20 +19,6 @@ export default defineType({
       description: 'Hero section content block.'
     }),
 
-    // Types of Risk Section
-    defineField({
-      name: 'typesOfRiskTitle',
-      title: 'Types of Risk — Section Title',
-      type: 'string',
-      description: 'Heading displayed above the Types of Risk section. Defaults to "The types of risk".'
-    }),
-    defineField({
-      name: 'typesOfRiskSection',
-      title: 'Types of Risk Section',
-      type: 'sectionContent',
-      description: 'Content for the Types of Risk section.'
-    }),
-
     // De-risking Section
     defineField({
       name: 'deriskingTitle',
