@@ -127,6 +127,13 @@ const {
       </div>
     </footer>
 
+    <!-- Disable right-click context menu site-wide -->
+    <script>
+      document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+      });
+    </script>
+
     <!-- Interactive script for sticky navbar, mobile menu, backdrop, and contact popover -->
     <script>
       const nav = document.getElementById('main-nav');

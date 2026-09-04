@@ -481,3 +481,11 @@ figcaption::before {
   font-style: normal;
 }
 
+/* Discourage saving/dragging images (used alongside the site-wide right-click block) */
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
