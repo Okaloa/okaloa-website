@@ -33,20 +33,6 @@ export default defineType({
       description: 'De-risking section content block.'
     }),
 
-    // How We Engage Section
-    defineField({
-      name: 'engageTitle',
-      title: 'How We Engage — Section Title',
-      type: 'string',
-      description: 'Heading for the How We Engage section. Defaults to "How we engage".'
-    }),
-    defineField({
-      name: 'engageSection',
-      title: 'How We Engage Section',
-      type: 'sectionContent',
-      description: 'How We Engage section content block.'
-    }),
-
     // Is This For You Section
     defineField({
       name: 'whenTitle',
@@ -59,6 +45,20 @@ export default defineType({
       title: 'Is This For You Section',
       type: 'sectionContent',
       description: 'Is This For You section content block.'
+    }),
+
+    // How We Engage Section
+    defineField({
+      name: 'engageTitle',
+      title: 'How We Engage — Section Title',
+      type: 'string',
+      description: 'Heading for the How We Engage section. Defaults to "How we engage".'
+    }),
+    defineField({
+      name: 'engageSection',
+      title: 'How We Engage Section',
+      type: 'sectionContent',
+      description: 'How We Engage section content block.'
     }),
 
     // It's Working Section (Between Is This For You and About)
