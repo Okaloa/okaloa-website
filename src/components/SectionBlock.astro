@@ -9,12 +9,16 @@ interface Props {
     content?: any[];
   };
   bgClass?: string;
+  leftColumn?: any[];
+  rightColumn?: any[];
 }
 
-const { id, title, titleOverride, section, bgClass = 'section-light' } = Astro.props;
+const { id, title, titleOverride, section, bgClass = 'section-light', leftColumn, rightColumn } = Astro.props;
 const displayTitle = titleOverride || title;
 
 const content = Array.isArray(section) ? section : section?.content;
+const hasLeft = Array.isArray(leftColumn) && leftColumn.length > 0;
+const hasRight = Array.isArray(rightColumn) && rightColumn.length > 0;
 ---
 
 <section class={`section ${bgClass}`} id={id}>
@@ -24,6 +28,16 @@ const content = Array.isArray(section) ? section : section?.content;
       {content && content.length > 0 && (
         <div class="block-text">
           <Fragment set:html={portableTextToHtml(content)} />
+        </div>
+      )}
+      {(hasLeft || hasRight) && (
+        <div class="two-columns">
+          <div class="block-text">
+            {hasLeft && <Fragment set:html={portableTextToHtml(leftColumn)} />}
+          </div>
+          <div class="block-text">
+            {hasRight && <Fragment set:html={portableTextToHtml(rightColumn)} />}
+          </div>
         </div>
       )}
     </div>
@@ -42,5 +56,23 @@ const content = Array.isArray(section) ? section : section?.content;
   .block-text :global(p:last-child),
   .block-text :global(.block-paragraph:last-child) {
     margin-bottom: 0;
+  }
+
+  .two-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 0.5em;
+  }
+
+  .two-columns > .block-text {
+    min-width: 0;
+  }
+
+  @media (min-width: 768px) {
+    .two-columns {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
   }
 </style>

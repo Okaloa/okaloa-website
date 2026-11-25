@@ -13,6 +13,7 @@ try {
     heroSection,
     riskCultureTitle,
     riskCultureSection,
+    riskCultureColumns,
     deriskingTitle,
     deriskingSection,
     engageTitle,
@@ -91,6 +92,8 @@ const footerTagline = homepage.footerTagline || "Helping leaders de-risk strateg
     title="Healthy risk culture"
     titleOverride={homepage.riskCultureTitle}
     section={riskCultureSec}
+    leftColumn={homepage.riskCultureColumns?.leftColumn}
+    rightColumn={homepage.riskCultureColumns?.rightColumn}
     bgClass="section-soft"
   />
 
