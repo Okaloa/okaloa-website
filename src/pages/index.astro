@@ -11,6 +11,8 @@ try {
   content = await sanityClient.fetch(`*[_type == "homepage" && (_id == "homepage" || _id == "drafts.homepage")] | order(_updatedAt desc)[0]{
     heroHeadline,
     heroSection,
+    riskCultureTitle,
+    riskCultureSection,
     deriskingTitle,
     deriskingSection,
     engageTitle,
@@ -32,6 +34,7 @@ const homepage = content || {};
 
 const heroHeadline = homepage.heroHeadline;
 const heroSec = homepage.heroSection;
+const riskCultureSec = homepage.riskCultureSection;
 const deriskingSec = homepage.deriskingSection;
 const engageSec = homepage.engageSection;
 const whenSec = homepage.whenSection;
@@ -81,6 +84,15 @@ const footerTagline = homepage.footerTagline || "Helping leaders de-risk strateg
       </div>
     </div>
   </header>
+
+  <!-- Healthy Risk Culture Section -->
+  <SectionBlock
+    id="healthy-risk-culture"
+    title="Healthy risk culture"
+    titleOverride={homepage.riskCultureTitle}
+    section={riskCultureSec}
+    bgClass="section-soft"
+  />
 
   <!-- De-risking Section -->
   <SectionBlock
