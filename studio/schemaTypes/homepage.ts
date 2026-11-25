@@ -19,6 +19,20 @@ export default defineType({
       description: 'Hero section content block.'
     }),
 
+    // Healthy Risk Culture Section
+    defineField({
+      name: 'riskCultureTitle',
+      title: 'Healthy Risk Culture — Section Title',
+      type: 'string',
+      description: 'Heading for the Healthy Risk Culture section. Defaults to "Healthy risk culture".'
+    }),
+    defineField({
+      name: 'riskCultureSection',
+      title: 'Healthy Risk Culture Section',
+      type: 'sectionContent',
+      description: 'Healthy Risk Culture section content block.'
+    }),
+
     // De-risking Section
     defineField({
       name: 'deriskingTitle',
