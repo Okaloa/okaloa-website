@@ -210,7 +210,15 @@ const footerTagline = homepage.footerTagline || "Helping leaders de-risk strateg
   .hero-inner {
     position: relative;
     z-index: 2;
-    max-width: var(--container-narrow-width);
+    /* Wide enough for the hero headlines to fit on one line on desktop */
+    max-width: var(--container-max-width);
+  }
+
+  /* Keep the hero body text at its original narrow width */
+  .hero-text :global(p) {
+    max-width: calc(var(--container-narrow-width) - 2 * var(--space-lg));
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .hero-headline {
