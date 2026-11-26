@@ -50,6 +50,12 @@ export default defineType({
         })
       ]
     }),
+    defineField({
+      name: 'riskCultureSection2',
+      title: 'Healthy Risk Culture Section — Content below columns',
+      type: 'sectionContent',
+      description: 'Optional. Healthy Risk Culture content block shown directly below the two-column content.'
+    }),
 
     // De-risking Section
     defineField({

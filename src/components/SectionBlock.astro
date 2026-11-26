@@ -11,12 +11,16 @@ interface Props {
   bgClass?: string;
   leftColumn?: any[];
   rightColumn?: any[];
+  sectionAfterColumns?: {
+    content?: any[];
+  };
 }
 
-const { id, title, titleOverride, section, bgClass = 'section-light', leftColumn, rightColumn } = Astro.props;
+const { id, title, titleOverride, section, bgClass = 'section-light', leftColumn, rightColumn, sectionAfterColumns } = Astro.props;
 const displayTitle = titleOverride || title;
 
 const content = Array.isArray(section) ? section : section?.content;
+const contentAfter = Array.isArray(sectionAfterColumns) ? sectionAfterColumns : sectionAfterColumns?.content;
 const hasLeft = Array.isArray(leftColumn) && leftColumn.length > 0;
 const hasRight = Array.isArray(rightColumn) && rightColumn.length > 0;
 ---
@@ -38,6 +42,11 @@ const hasRight = Array.isArray(rightColumn) && rightColumn.length > 0;
           <div class="block-text">
             {hasRight && <Fragment set:html={portableTextToHtml(rightColumn)} />}
           </div>
+        </div>
+      )}
+      {contentAfter && contentAfter.length > 0 && (
+        <div class="block-text block-after-columns">
+          <Fragment set:html={portableTextToHtml(contentAfter)} />
         </div>
       )}
     </div>
@@ -62,6 +71,10 @@ const hasRight = Array.isArray(rightColumn) && rightColumn.length > 0;
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
+    margin-top: 0.5em;
+  }
+
+  .block-after-columns {
     margin-top: 0.5em;
   }
 
